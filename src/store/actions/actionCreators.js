@@ -11,6 +11,9 @@ export const REGISTER_ERROR = 'REGISTER_ERROR';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const CREATE_TODO_LIST = 'CREATE_TODO_LIST';
+export const CREATE_TODO_LIST_ERROR = 'CREATE_TODO_LIST_ERROR';
+
 
 // THESE CREATORS MAKE ACTIONS ASSOCIATED WITH USER ACCOUNTS
 
@@ -32,11 +35,20 @@ export function logoutSuccess() {
 
 // THESE CREATORS MAKE ACTIONS FOR ASYNCHRONOUS TODO LIST UPDATES
 export function createTodoList(todoList) {
-    return {
-        type: 'CREATE_TODO_LIST',
-        todoList
+    return (dispatch, getState, { getFirestore }) => {
+        const fireStore = getFirestore();
+        fireStore.collection('todoLists').add({
+            ...todoList,
+            created: new Date()
+        }).then((docRef) => {
+            // to todoListReducer
+            dispatch( { type: 'CREATE_TODO_LIST', payload: docRef.id });
+        }).catch(err => {
+            dispatch({ type: 'CREATE_TODO_LIST_ERROR' });
+        });
     }
 }
+
 export function createTodoListError(error) {
     return {
         type: 'CREATE_TODO_LIST_ERROR',
