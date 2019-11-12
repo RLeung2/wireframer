@@ -4,12 +4,27 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import ItemsList from './ItemsList.js'
 import { firestoreConnect } from 'react-redux-firebase';
+import { Modal, Button } from 'react-materialize';
+import { deleteListHandler } from '../../store/database/asynchHandler'
+
+const trigger = <h1 className="">&#128465;</h1>;
 
 class ListScreen extends Component {
     state = {
         name: '',
         owner: '',
     }
+
+    handleDeleteList = (e) => {
+        e.preventDefault();
+  
+        const { props, state } = this;
+        const { firebase } = props;
+        const todoList = this.props.todoList;
+  
+        props.deleteList(todoList, firebase);
+        this.props.history.push("/");
+      }  
 
     handleChange = (e) => {
         const { target } = e;
@@ -33,6 +48,11 @@ class ListScreen extends Component {
         return (
             <div className="container white">
                 <h5 className="grey-text text-darken-3">Todo List</h5>
+                <Modal header="Modal Header" trigger={trigger}>
+                    You wanna delete this bih?
+                    <button onClick={this.handleDeleteList}>Yap</button>
+                </Modal>
+
                 <div className="input-field">
                     <label htmlFor="email">Name</label>
                     <input className="active" type="text" name="name" id="name" onChange={this.handleChange} value={todoList.name} />
@@ -62,8 +82,13 @@ const mapStateToProps = (state, ownProps) => {
   
 };
 
+const mapDispatchToProps = dispatch => ({
+    deleteList: (todoList, firebase) => dispatch(deleteListHandler(todoList, firebase)),
+  });
+  
+
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   firestoreConnect([
     { collection: 'todoLists' },
   ]),

@@ -14,6 +14,8 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const CREATE_TODO_LIST = 'CREATE_TODO_LIST';
 export const CREATE_TODO_LIST_ERROR = 'CREATE_TODO_LIST_ERROR';
 export const GO_HOME = 'GO_HOME';
+export const DELETE_SUCCESS = 'DELETE_SUCCES';
+export const DELETE_TODO_LIST = 'DELETE_TODO_LIST';
 
 
 // THESE CREATORS MAKE ACTIONS ASSOCIATED WITH USER ACCOUNTS
@@ -62,3 +64,15 @@ export function goHome() {
         type: 'GO_HOME'
     }
 }
+
+export function deleteSuccess() {
+    return { type: 'DELETE_SUCCESS' }
+}
+
+export function createDeleteList(todoList) {
+    return {
+        type: 'DELETE_TODO_LIST',
+        todoList
+    }
+}
+
