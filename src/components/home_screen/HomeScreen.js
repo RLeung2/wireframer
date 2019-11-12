@@ -14,6 +14,14 @@ class HomeScreen extends Component {
 
     }
 
+    componentWillReceiveProps = (nextProps) => {
+        if(nextProps.id != "") {
+            this.props.history.push('/todoList/' + this.props.id);
+        }
+    }
+
+
+
     render() {
         if (!this.props.auth.uid) {
             return <Redirect to="/login" />;
@@ -45,11 +53,13 @@ class HomeScreen extends Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log("ABOVE");
     console.log(state);
+    console.log("BELOW");
     return {
         todoLists: state.firestore.ordered.todoLists,
         auth: state.firebase.auth,
-        id: state.id
+        id: state.todoList.id
     };
 };
 
@@ -64,6 +74,6 @@ const mapDispatchToProps = (dispatch) => {
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     firestoreConnect([
-      { collection: 'todoLists' },
+      { collection: 'todoLists', orderBy: ['created', 'desc'] },
     ]),
 )(HomeScreen);

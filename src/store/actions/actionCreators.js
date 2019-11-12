@@ -13,6 +13,7 @@ export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const CREATE_TODO_LIST = 'CREATE_TODO_LIST';
 export const CREATE_TODO_LIST_ERROR = 'CREATE_TODO_LIST_ERROR';
+export const GO_HOME = 'GO_HOME';
 
 
 // THESE CREATORS MAKE ACTIONS ASSOCIATED WITH USER ACCOUNTS
@@ -53,5 +54,11 @@ export function createTodoListError(error) {
     return {
         type: 'CREATE_TODO_LIST_ERROR',
         error
+    }
+}
+
+export function goHome() {
+    return {
+        type: 'GO_HOME'
     }
 }
