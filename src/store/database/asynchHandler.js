@@ -40,3 +40,24 @@ export const deleteListHandler = (todoList, firebase) => (dispatch, getState, { 
       dispatch(actionCreators.deleteSuccess);
   });
 }
+
+export const sortByTaskHandler = (todoList, firerbase, sortedItems) => (dispatch, getState, { getFirestore }) => {
+  const fireStore = getFirestore();
+  fireStore.collection('todoLists').doc(todoList.id).set({items: todoList.items, name: todoList.name, owner: todoList.owner}).then(() => {
+    dispatch(actionCreators.sortSuccess);
+  });
+}
+
+export const sortByDueDateHandler = (todoList, firerbase, sortedItems) => (dispatch, getState, { getFirestore }) => {
+  const fireStore = getFirestore();
+  fireStore.collection('todoLists').doc(todoList.id).set({items: todoList.items, name: todoList.name, owner: todoList.owner}).then(() => {
+    dispatch(actionCreators.sortSuccess);
+  });
+}
+
+export const sortByStatusHandler = (todoList, firerbase, sortedItems) => (dispatch, getState, { getFirestore }) => {
+  const fireStore = getFirestore();
+  fireStore.collection('todoLists').doc(todoList.id).set({items: todoList.items, name: todoList.name, owner: todoList.owner}).then(() => {
+    dispatch(actionCreators.sortSuccess);
+  });
+}

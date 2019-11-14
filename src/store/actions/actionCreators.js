@@ -16,6 +16,7 @@ export const CREATE_TODO_LIST_ERROR = 'CREATE_TODO_LIST_ERROR';
 export const GO_HOME = 'GO_HOME';
 export const DELETE_SUCCESS = 'DELETE_SUCCES';
 export const DELETE_TODO_LIST = 'DELETE_TODO_LIST';
+export const SORT_SUCCESS = 'SORT_SUCCESS';
 
 
 // THESE CREATORS MAKE ACTIONS ASSOCIATED WITH USER ACCOUNTS
@@ -69,10 +70,6 @@ export function deleteSuccess() {
     return { type: 'DELETE_SUCCESS' }
 }
 
-export function createDeleteList(todoList) {
-    return {
-        type: 'DELETE_TODO_LIST',
-        todoList
-    }
+export function sortSuccess() {
+    return { type: 'SORT_SUCCESS'}
 }
-
