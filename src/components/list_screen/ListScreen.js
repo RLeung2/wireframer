@@ -153,11 +153,11 @@ class ListScreen extends Component {
                 </Modal>
 
                 <div className="input-field">
-                    <label htmlFor="email">Name</label>
+                    <label className="active" htmlFor="email">Name</label>
                     <input className="active" type="text" name="name" id="name" onChange={this.handleChange} value={todoList.name} />
                 </div>
                 <div className="input-field">
-                    <label htmlFor="password">Owner</label>
+                    <label className="active" htmlFor="password">Owner</label>
                     <input className="active" type="text" name="owner" id="owner" onChange={this.handleChange} value={todoList.owner} />
                 </div>
                 <div id="list-items-container">
