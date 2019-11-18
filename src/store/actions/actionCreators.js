@@ -17,6 +17,9 @@ export const GO_HOME = 'GO_HOME';
 export const DELETE_SUCCESS = 'DELETE_SUCCES';
 export const DELETE_TODO_LIST = 'DELETE_TODO_LIST';
 export const SORT_SUCCESS = 'SORT_SUCCESS';
+export const MOVE_UP_SUCCESS = 'MOVE_UP_SUCCESS';
+export const MOVE_DOWN_SUCCESS = 'MOVE_DOWN_SUCCESS';
+export const DELETE_ITEM_SUCCESS = 'DELETE_ITEM_SUCCESS';
 
 
 // THESE CREATORS MAKE ACTIONS ASSOCIATED WITH USER ACCOUNTS
@@ -72,4 +75,16 @@ export function deleteSuccess() {
 
 export function sortSuccess() {
     return { type: 'SORT_SUCCESS'}
+}
+
+export function moveUpSuccess() {
+    return { type: 'MOVE_UP_SUCCESS'}
+}
+
+export function moveDownSuccess() {
+    return { type: 'MOVE_DOWN_SUCCESS'}
+}
+
+export function deleteItemSuccess() {
+    return { type: 'DELETE_ITEM_SUCCESS'}
 }

@@ -7,6 +7,18 @@ const initState = {
 
 const todoListReducer = (state = initState, action) => {
     switch (action.type) {
+        case actionCreators.DELETE_ITEM_SUCCESS:
+            return {
+              ...state,
+            }
+        case actionCreators.MOVE_DOWN_SUCCESS:
+            return {
+              ...state,
+            }
+        case actionCreators.MOVE_UP_SUCCESS:
+            return {
+              ...state,
+            }
         case actionCreators.SORT_SUCCESS:
             return {
               ...state,

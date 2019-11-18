@@ -41,23 +41,44 @@ export const deleteListHandler = (todoList, firebase) => (dispatch, getState, { 
   });
 }
 
-export const sortByTaskHandler = (todoList, firerbase, sortedItems) => (dispatch, getState, { getFirestore }) => {
+export const sortByTaskHandler = (todoList, firebase, sortedItems) => (dispatch, getState, { getFirestore }) => {
   const fireStore = getFirestore();
   fireStore.collection('todoLists').doc(todoList.id).set({items: todoList.items, name: todoList.name, owner: todoList.owner, created: new Date()}).then(() => {
     dispatch(actionCreators.sortSuccess);
   });
 }
 
-export const sortByDueDateHandler = (todoList, firerbase, sortedItems) => (dispatch, getState, { getFirestore }) => {
+export const sortByDueDateHandler = (todoList, firebase, sortedItems) => (dispatch, getState, { getFirestore }) => {
   const fireStore = getFirestore();
   fireStore.collection('todoLists').doc(todoList.id).set({items: todoList.items, name: todoList.name, owner: todoList.owner, created: new Date()}).then(() => {
     dispatch(actionCreators.sortSuccess);
   });
 }
 
-export const sortByStatusHandler = (todoList, firerbase, sortedItems) => (dispatch, getState, { getFirestore }) => {
+export const sortByStatusHandler = (todoList, firebase, sortedItems) => (dispatch, getState, { getFirestore }) => {
   const fireStore = getFirestore();
   fireStore.collection('todoLists').doc(todoList.id).set({items: todoList.items, name: todoList.name, owner: todoList.owner, created: new Date()}).then(() => {
     dispatch(actionCreators.sortSuccess);
+  });
+}
+
+export const moveUpHandler = (todoList, firebase, newListItems) => (dispatch, getState, { getFirestore }) => {
+  const fireStore = getFirestore();
+  fireStore.collection('todoLists').doc(todoList.id).set({items: newListItems, name: todoList.name, owner: todoList.owner, created: new Date()}).then(() => {
+    dispatch(actionCreators.moveUpSuccess);
+  });
+}
+
+export const moveDownHandler = (todoList, firebase, newListItems) => (dispatch, getState, { getFirestore }) => {
+  const fireStore = getFirestore();
+  fireStore.collection('todoLists').doc(todoList.id).set({items: newListItems, name: todoList.name, owner: todoList.owner, created: new Date()}).then(() => {
+    dispatch(actionCreators.moveDownSuccess);
+  });
+}
+
+export const deleteItemHandler = (todoList, firebase, newListItems) => (dispatch, getState, { getFirestore }) => {
+  const fireStore = getFirestore();
+  fireStore.collection('todoLists').doc(todoList.id).set({items: newListItems, name: todoList.name, owner: todoList.owner, created: new Date()}).then(() => {
+    dispatch(actionCreators.deleteItemSuccess);
   });
 }

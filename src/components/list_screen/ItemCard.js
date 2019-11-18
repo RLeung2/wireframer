@@ -34,6 +34,8 @@ const hover_button =
 class ItemCard extends React.Component {
     render() {
         const { item } = this.props; 
+        const { todoList } = this.props;
+        const { index } = this.props;
         const status = item.completed ? "Completed" : "Pending";
         const color = item.completed ? {color: 'green'} : {color: 'red'};
         return (
@@ -47,7 +49,16 @@ class ItemCard extends React.Component {
                         {item.due_date}
                     </div>
                     <div className='list_item_card_completed' style={color}>{status}</div>
-                    {hover_button}
+                    <Button style = {button_style}
+                        floating
+                        fab={{direction: 'left'}}
+                        className="amber darken-2"
+                        large
+                        >
+                        <Button onClick={this.props.handleMoveUp.bind(this, index)} floating icon={<Icon children = 'wc' />} className="blue" />
+                        <Button onClick={this.props.handleMoveDown.bind(this, index)} floating icon={<Icon children = 'airline_seat_individual_suite' />} className="pink darken-4" />
+                        <Button onClick={this.props.handleDeleteItem.bind(this, item.id)} floating icon={<Icon children = 'child_care' />} className="red" />
+                    </Button>
                 </div>
             </div>
         );
