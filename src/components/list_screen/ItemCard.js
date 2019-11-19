@@ -55,9 +55,9 @@ class ItemCard extends React.Component {
                         className="amber darken-2"
                         large
                         >
-                        <Button onClick={this.props.handleMoveUp.bind(this, index)} floating icon={<Icon children = 'wc' />} className="blue" />
-                        <Button onClick={this.props.handleMoveDown.bind(this, index)} floating icon={<Icon children = 'airline_seat_individual_suite' />} className="pink darken-4" />
-                        <Button onClick={this.props.handleDeleteItem.bind(this, item.id)} floating icon={<Icon children = 'child_care' />} className="red" />
+                        <Button onClick={this.props.handleMoveUp.bind(this, index)} floating icon={<Icon children = 'arrow_upward' />} className="blue" />
+                        <Button onClick={this.props.handleMoveDown.bind(this, index)} floating icon={<Icon children = 'arrow_downward' />} className="pink darken-4" />
+                        <Button onClick={this.props.handleDeleteItem.bind(this, item.id)} floating icon={<Icon children = 'close' />} className="red" />
                     </Button>
                 </div>
             </div>

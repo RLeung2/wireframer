@@ -151,6 +151,8 @@ class ListScreen extends Component {
     }
 
     handleMoveUp = (index, event) => {
+        event.preventDefault();
+
         const { props, state } = this;
         const { firebase } = props;
         const todoList = this.props.todoList;
@@ -167,6 +169,8 @@ class ListScreen extends Component {
     }
 
     handleMoveDown = (index, event) => {
+        event.preventDefault();
+
         const { props, state } = this;
         const { firebase } = props;
         const todoList = this.props.todoList;
@@ -183,6 +187,8 @@ class ListScreen extends Component {
     }
 
     handleDeleteItem = (key, event) => {
+        event.preventDefault();
+
         const { props, state } = this;
         const { firebase } = props;
         const todoList = this.props.todoList;
