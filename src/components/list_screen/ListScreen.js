@@ -12,14 +12,14 @@ import { sortByStatusHandler } from '../../store/database/asynchHandler'
 import { moveUpHandler } from '../../store/database/asynchHandler'
 import { moveDownHandler } from '../../store/database/asynchHandler'
 import { deleteItemHandler } from '../../store/database/asynchHandler'
-import { moveListToTop } from '../../store/actions/actionCreators';
+import { moveListToTop, editListNameAndOwner } from '../../store/actions/actionCreators';
 
 const trigger = <h1 className="list-trash">&#128465;</h1>;
 
 class ListScreen extends Component {
     state = {
-        name: '',
-        owner: '',
+        name: this.props.todoList.name,
+        owner: this.props.todoList.owner,
         sortingCriteria: '',
     }
 
@@ -32,7 +32,6 @@ class ListScreen extends Component {
         }
     }
   
-
     handleDeleteList = (e) => {
         e.preventDefault();
   
@@ -50,9 +49,12 @@ class ListScreen extends Component {
         this.setState(state => ({
             ...state,
             [target.id]: target.value,
-        }))
-        console.log(this.state)
+        }), () => {
+            // callback to action creator
+            this.props.editListNameAndOwner(this.props.todoList, this.state);
+        });
     }
+
 
     handleSortByTask = () => {
         const { props, state } = this;
@@ -215,11 +217,11 @@ class ListScreen extends Component {
                 </Modal>
                 <div className="input-field">
                     <label htmlFor="email" className="active">Name:</label>
-                    <input type="text" name="name" id="name" onChange={this.handleChange} value={todoList.name} />
+                    <input type="text" name="name" id="name" onChange={this.handleChange} defaultValue={todoList.name} />
                 </div>
                 <div className="input-field">
                     <label htmlFor="password" className="active">Owner:</label>
-                    <input type="text" name="owner" id="owner" onChange={this.handleChange} value={todoList.owner} />
+                    <input type="text" name="owner" id="owner" onChange={this.handleChange} defaultValue={todoList.owner} />
                 </div>
                 <div id="list-items-container">
                     <div className="list_item_header_card">
@@ -265,6 +267,7 @@ const mapDispatchToProps = dispatch => ({
     moveDown: (todoList, firebase, newListItems) => dispatch(moveDownHandler(todoList, firebase, newListItems)),
     deleteItem: (todoList, firebase, newListItems) => dispatch(deleteItemHandler(todoList, firebase, newListItems)),
     moveListToTop: (id) => dispatch(moveListToTop(id)),
+    editListNameAndOwner: (todoList, state) => dispatch(editListNameAndOwner(todoList, state))
   });
 
 export default compose(

@@ -21,6 +21,7 @@ export const MOVE_UP_SUCCESS = 'MOVE_UP_SUCCESS';
 export const MOVE_DOWN_SUCCESS = 'MOVE_DOWN_SUCCESS';
 export const DELETE_ITEM_SUCCESS = 'DELETE_ITEM_SUCCESS';
 export const ADD_ITEM_SUCCESS = 'ADD_ITEM_SUCCESS';
+export const EDIT_LIST_NAME_OWNER = 'EDIT_LIST_NAME_OWNER';
 
 
 // THESE CREATORS MAKE ACTIONS ASSOCIATED WITH USER ACCOUNTS
@@ -111,7 +112,7 @@ export function moveListToTop(id) {
                 console.log("No document exists");
             }
         }).catch(function(error) {
-            console.log("Error :", error);
+            console.log("Error:", error);
         });
     }
 }
@@ -119,4 +120,30 @@ export function moveListToTop(id) {
 export function addItemSuccess() {
     return { type: 'ADD_ITEM_SUCCESS' }
 };
+
+export function editListNameAndOwner(todoList, state) {
+    return (dispatch, getState, { getFirestore }) => {
+        const fireStore = getFirestore();
+        const ref = fireStore.collection('todoLists').doc(todoList.id);
+        ref.get().then(function(doc) {
+            if (doc.exists) {
+                console.log("Document data:", doc.data().name);
+                const name = state.name;
+                const owner = state.owner;
+                const items = doc.data().items;
+                fireStore.collection('todoLists').doc(todoList.id).set({
+                    name: name,
+                    owner: owner,
+                    items: items,
+                    created: new Date()
+                })
+            } else {
+                console.log("No document exists");
+            }
+        }).catch(function(error) {
+            console.log("Error:", error);
+        });
+    }
+}
+
 
