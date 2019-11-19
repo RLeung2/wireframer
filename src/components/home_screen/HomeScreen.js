@@ -53,9 +53,7 @@ class HomeScreen extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log("ABOVE");
     console.log(state);
-    console.log("BELOW");
     return {
         todoLists: state.firestore.ordered.todoLists,
         auth: state.firebase.auth,

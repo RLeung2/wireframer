@@ -88,3 +88,29 @@ export function moveDownSuccess() {
 export function deleteItemSuccess() {
     return { type: 'DELETE_ITEM_SUCCESS'}
 }
+
+export function moveListToTop(id) {
+    return (dispatch, getState, { getFirestore }) => {
+        const fireStore = getFirestore();
+        const ref = fireStore.collection('todoLists').doc(id);
+        ref.get().then(function(doc) {
+            if (doc.exists) {
+                //console.log("Document data:", doc.data().name);
+                const name = doc.data().name;
+                const owner = doc.data().owner;
+                const items = doc.data().items;
+                fireStore.collection('todoLists').doc(id).set({
+                    name: name,
+                    owner: owner,
+                    items: items,
+                    created: new Date()
+                })
+            } else {
+                // doc.data() undefined
+                console.log("No document exists");
+            }
+        }).catch(function(error) {
+            console.log("Error :", error);
+        });
+    }
+}

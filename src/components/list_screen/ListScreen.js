@@ -12,6 +12,7 @@ import { sortByStatusHandler } from '../../store/database/asynchHandler'
 import { moveUpHandler } from '../../store/database/asynchHandler'
 import { moveDownHandler } from '../../store/database/asynchHandler'
 import { deleteItemHandler } from '../../store/database/asynchHandler'
+import { moveListToTop } from '../../store/actions/actionCreators';
 
 const trigger = <h1 className="">&#128465;</h1>;
 
@@ -22,7 +23,15 @@ class ListScreen extends Component {
         sortingCriteria: '',
     }
 
-    
+    componentDidMount = () => {
+        if (this.props.todoList) {
+            this.props.moveListToTop(this.props.todoList.id);
+        }
+        else {
+            this.props.history.push("/");
+        }
+    }
+  
 
     handleDeleteList = (e) => {
         e.preventDefault();
@@ -195,8 +204,8 @@ class ListScreen extends Component {
             <div className="container white">
                 <h5 className="grey-text text-darken-3">Todo List</h5>
                 <Modal header="Modal Header" trigger={trigger}>
-                    You wanna delete this bih?
-                    <button onClick={this.handleDeleteList}>Yap</button>
+                    Are you sure you want to delete this list?   
+                    <button onClick={this.handleDeleteList}>Yes</button>
                 </Modal>
 
                 <div className="input-field">
@@ -253,6 +262,7 @@ const mapDispatchToProps = dispatch => ({
     moveUp: (todoList, firebase, newListItems) => dispatch(moveUpHandler(todoList, firebase, newListItems)),
     moveDown: (todoList, firebase, newListItems) => dispatch(moveDownHandler(todoList, firebase, newListItems)),
     deleteItem: (todoList, firebase, newListItems) => dispatch(deleteItemHandler(todoList, firebase, newListItems)),
+    moveListToTop: (id) => dispatch(moveListToTop(id)),
   });
 
 export default compose(
