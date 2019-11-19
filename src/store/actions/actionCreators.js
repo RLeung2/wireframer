@@ -115,3 +115,8 @@ export function moveListToTop(id) {
         });
     }
 }
+
+export function addItemSuccess() {
+    return { type: 'ADD_ITEM_SUCCESS' }
+};
+

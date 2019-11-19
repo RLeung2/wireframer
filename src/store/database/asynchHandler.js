@@ -82,3 +82,11 @@ export const deleteItemHandler = (todoList, firebase, newListItems) => (dispatch
     dispatch(actionCreators.deleteItemSuccess);
   });
 }
+
+export const addItemHandler = (todoList, firebase) => (dispatch, getState, { getFirestore }) => {
+  const fireStore = getFirestore();
+  fireStore.collection('todoLists').doc(todoList.id).set({items: todoList.items, name: todoList.name, owner: todoList.owner}).then(() => {
+      dispatch(actionCreators.addItemSuccess);
+  });
+}
+

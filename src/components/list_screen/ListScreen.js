@@ -223,13 +223,13 @@ class ListScreen extends Component {
                 </div>
                 <div id="list-items-container">
                     <div className="list_item_header_card">
-                        <div className="list_item_task_header">
+                        <div className="list_item_task_header" onClick={this.handleSortByTask}>
                             Task
                         </div>
-                        <div className="list_item_due_date_header">
+                        <div className="list_item_due_date_header" onClick={this.handleSortByDueDate}>
                             Due Date
                         </div>
-                        <div className="list_item_status_header">
+                        <div className="list_item_status_header" onClick={this.handleSortByStatus}>
                             Status
                         </div>
                     </div>
