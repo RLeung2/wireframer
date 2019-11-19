@@ -60,7 +60,7 @@ class RegisterScreen extends Component {
           </div>
           <div className="input-field">
             <button type="submit" className="btn pink lighten-1 z-depth-0">Sign Up</button>
-            {authError ? <div className="red-text center"><p>{authError}</p></div> : null}
+            {authError ? <div className="red-text center-align"><p>{authError}</p></div> : null}
           </div>
         </form>
       </div>
