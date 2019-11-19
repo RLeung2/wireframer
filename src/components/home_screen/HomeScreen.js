@@ -7,6 +7,12 @@ import TodoListLinks from './TodoListLinks'
 import { createTodoList } from '../../store/actions/actionCreators';
 
 class HomeScreen extends Component {
+    state = {
+        name: 'Unknown',
+        owner: 'Unknown',
+        items: []
+    }
+
 
     handleNewList = (e) => {
         e.preventDefault()
@@ -31,16 +37,17 @@ class HomeScreen extends Component {
             <div className="dashboard container">
                 <div className="row">
                     <div className="col s12 m4">
+                        <br />
+                        <h4 className="your_lists_heading">Your Lists</h4>
                         <TodoListLinks />
                     </div>
-
                     <div className="col s8">
-                        <div className="banner">
+                        <div className="banner right">
                             @todo<br />
                             List Maker
                         </div>
                         
-                        <div className="home_new_list_container">
+                        <div className="home_new_list_container right">
                                 <button className="home_new_list_button" onClick={this.handleNewList}>
                                     Create a New To Do List
                                 </button>

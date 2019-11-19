@@ -13,9 +13,40 @@
   --bounceEasing: cubic-bezier(0.51, 0.92, 0.24, 1.15);
 }
 
+@font-face {
+  font-family: 'Lexend Exa';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lexend Exa Regular'), local('LexendExa-Regular'), url('./fonts/Lexend Exa/UMBXrPdOoHOnxExyjdBeaiLdA4M5.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+
+/* latin-ext */
+@font-face {
+  font-family: 'Lexend Exa';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lexend Exa Regular'), local('LexendExa-Regular'), url('./fonts/Lexend Exa/UMBXrPdOoHOnxExyjdBeaiPdA4M5.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+  font-family: 'Lexend Exa';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lexend Exa Regular'), local('LexendExa-Regular'), url('./fonts/Lexend Exa/UMBXrPdOoHOnxExyjdBeai3dAw.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 body {
   background-color: var(--swatch-foundation);
   font-family: 'Lexend Exa';
+}
+
+.dashboard, .todo-list
+{
+  background-color: var(--swatch-primary);
 }
 
 div.banner {
@@ -30,6 +61,7 @@ div.banner {
   padding-left: 10%;
   padding-top: 5%;
   padding-bottom: 5%;
+  padding-right: 25%;
 }
 
 .home_new_list_button {
@@ -37,4 +69,93 @@ div.banner {
 }
 .home_new_list_button:hover {
   box-shadow: 1px 2px;
+}
+
+.home_your_lists_container
+{
+  font-size: 36pt;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+.your_lists_heading
+{
+  font-size: 27pt;
+  font-weight: bolder;
+}
+
+.home_new_list_button
+{
+  font-size: 40pt;
+}
+
+.home_new_list_button:hover { 
+  box-shadow: 1px 2px;
+}
+
+.todo-list-link
+{
+  background-color: var(--swatch-boundary);
+}
+
+.list-heading
+{
+  font-size: 26pt;
+}
+
+.list-trash {
+  font-size: 44pt;
+}
+
+.list-trash:hover {
+  color: var(--swatch-accent);
+  cursor: pointer;
+}
+
+.list_item_header_card
+{
+  background-color: var(--swatch-accent);
+}
+
+.list_item_task_header, .list_item_due_date_header, .list_item_status_header {
+  font-weight: bold;
+  font-size: 28pt;
+}
+
+.list_item_task_header:hover, .list_item_due_date_header:hover, .list_item_status_header:hover {
+  color: var(--swatch-primary);
+}
+
+.list_item_card, .list_item_add_card
+{
+  background-color: var(--swatch-neutral);
+}
+
+.list_item_card:hover, .list_item_add_card:hover
+{
+  background-color: var(--swatch-complement);
+}
+
+.list_item_add_card {
+  font-weight: bold;
+  font-size: 24pt;
+}
+
+.list_item_card_description {
+  font-weight: bold;
+  font-size: 18pt;
+}
+
+.list_item_card_assigned_to, .list_item_card_due_date, 
+.list_item_card_completed {
+  font-weight: normal;
+  font-size: 14pt;
+}
+
+.assigned_to
+{
+  font-weight: bold;
 }

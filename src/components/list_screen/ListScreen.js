@@ -14,7 +14,7 @@ import { moveDownHandler } from '../../store/database/asynchHandler'
 import { deleteItemHandler } from '../../store/database/asynchHandler'
 import { moveListToTop } from '../../store/actions/actionCreators';
 
-const trigger = <h1 className="">&#128465;</h1>;
+const trigger = <h1 className="list-trash">&#128465;</h1>;
 
 class ListScreen extends Component {
     state = {
@@ -201,39 +201,41 @@ class ListScreen extends Component {
 	        return <React.Fragment />
 
         return (
-            <div className="container white">
-                <h5 className="grey-text text-darken-3">Todo List</h5>
+            <div className="container todo-list">
+                <br />
+                <div className="list-heading-container">
+                    <h5 className="grey-text text-darken-3 list-heading">Todo List</h5>
+                </div>
+                <br />
+                <br />
+                <br />
                 <Modal header="Modal Header" trigger={trigger}>
                     Are you sure you want to delete this list?   
                     <button onClick={this.handleDeleteList}>Yes</button>
                 </Modal>
-
                 <div className="input-field">
-                    <label className="active" htmlFor="email">Name</label>
-                    <input className="active" type="text" name="name" id="name" onChange={this.handleChange} value={todoList.name} />
+                    <label htmlFor="email" className="active">Name:</label>
+                    <input type="text" name="name" id="name" onChange={this.handleChange} value={todoList.name} />
                 </div>
                 <div className="input-field">
-                    <label className="active" htmlFor="password">Owner</label>
-                    <input className="active" type="text" name="owner" id="owner" onChange={this.handleChange} value={todoList.owner} />
+                    <label htmlFor="password" className="active">Owner:</label>
+                    <input type="text" name="owner" id="owner" onChange={this.handleChange} value={todoList.owner} />
                 </div>
                 <div id="list-items-container">
                     <div className="list_item_header_card">
-                        <div className="list_item_task_header" onClick={this.handleSortByTask}>
+                        <div className="list_item_task_header">
                             Task
                         </div>
-                        <div className="list_item_due_date_header" onClick={this.handleSortByDueDate}>
+                        <div className="list_item_due_date_header">
                             Due Date
                         </div>
-                        <div className="list_item_status_header" onClick={this.handleSortByStatus}>
+                        <div className="list_item_status_header">
                             Status
                         </div>
                     </div>
 
                     <ItemsList handleMoveUp={this.handleMoveUp} handleMoveDown={this.handleMoveDown} handleDeleteItem={this.handleDeleteItem} todoList={todoList} />
-                    <div className = "list_item_add_card center-align">
-                        +
-                    </div>
-                </div>
+                </div> 
             </div>
         );
     }

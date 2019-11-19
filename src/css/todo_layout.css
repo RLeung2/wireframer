@@ -15,14 +15,105 @@ body {
 
 body {
   position: absolute;
-  width: 80%;
+  width: 85%;
   left: 10%;
   top: 5%;
 }
 
+.dashboard, .todo-list
+{
+  width: 90%;
+  margin-top: 5%;
+}
+
 div.banner {
-  padding: 20px;
-  margin-top: 60px;
+  margin-top: 5px;
+}
+
+.home_new_list_container
+{
+  margin-top: 18px;
+  margin-right: 6.5%;
+}
+
+.home_new_list_button
+{
+  margin: auto;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.your_lists_heading
+{
+  margin-left: 25px;
+}
+
+.todo-lists
+{
+  margin-top: -20px;
+}
+
+.list-heading-container
+{
+  position: relative;
+}
+
+.list-heading, .list-trash {
+  position: absolute;
+}
+
+.list-trash
+{
+  left: 85%;
+  width: 15%;
+  text-align: right;
+}
+
+.list_item_card, .list_item_add_card, .list_item_header_card {
+  position: relative;
+  height: 75px;
+  grid-row-gap: 0px;
+  grid-column-gap: 50px;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.list_item_task_header, .list_item_due_date_header, .list_item_status_header {
+  position: absolute;
+  top: 12%;
+}
+
+.list_item_task_header, .list_item_card_assigned_to
+{
+  left: 2%;
+}
+
+.list_item_due_date_header, .list_item_card_due_date
+{
+  left: 35%;
+}
+
+.list_item_status_header, .list_item_card_completed
+{
+  left: 60%;
+}
+
+.list_item_card_description {
+  position: absolute;
+  left: 2%;
+}
+
+.list_item_card_description
+{
+  top: 10%;
+}
+
+.list_item_card_assigned_to, .list_item_card_due_date, 
+.list_item_card_completed {
+  position: absolute;
+  top: 55%;
 }
 
 form {
@@ -48,3 +139,4 @@ input[type=email]:not(.browser-default):focus:not([readonly]) + label,
 input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   color: #ec407a !important;
 }
+

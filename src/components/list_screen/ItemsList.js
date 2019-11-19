@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import ItemCard from './ItemCard';
 import { firestoreConnect } from 'react-redux-firebase';
+import { Link } from 'react-router-dom';
 
 class ItemsList extends React.Component {
     render() {
@@ -17,9 +18,12 @@ class ItemsList extends React.Component {
                 {items && items.map(function(item, index) {
                     item.id = item.key;
                     return (
-                        <ItemCard handleMoveUp={handleMoveUp} handleMoveDown={handleMoveDown} handleDeleteItem={handleDeleteItem} todoList={todoList} item={item} index={index}/>
+                        <Link to={"/itemScreen/" + todoList.id + "/" + index}>
+                            <ItemCard handleMoveUp={handleMoveUp} handleMoveDown={handleMoveDown} handleDeleteItem={handleDeleteItem} todoList={todoList} item={item} index={index}/>
+                        </Link>
                     );})
                 }
+                <Link to={"/itemScreen/" + todoList.id + "/" + items.length}><div className = "list_item_add_card center-align">&#x002B;</div></Link>
             </div>
         );
     }
