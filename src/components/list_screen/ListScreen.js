@@ -18,8 +18,8 @@ const trigger = <h1 className="list-trash">&#128465;</h1>;
 
 class ListScreen extends Component {
     state = {
-        name: this.props.todoList.name,
-        owner: this.props.todoList.owner,
+        name: this.props.todoList === undefined ? '' : this.props.todoList.name,
+        owner: this.props.todoList === undefined ? '' : this.props.todoList.owner,
         sortingCriteria: '',
     }
 
@@ -207,14 +207,14 @@ class ListScreen extends Component {
                 <br />
                 <div className="list-heading-container">
                     <h5 className="grey-text text-darken-3 list-heading">Todo List</h5>
+                    <Modal header="Modal Header" trigger={trigger}>
+                        Are you sure you want to delete this list?   
+                        <button onClick={this.handleDeleteList}>Yes</button>
+                    </Modal>
                 </div>
                 <br />
                 <br />
                 <br />
-                <Modal header="Modal Header" trigger={trigger}>
-                    Are you sure you want to delete this list?   
-                    <button onClick={this.handleDeleteList}>Yes</button>
-                </Modal>
                 <div className="input-field">
                     <label htmlFor="email" className="active">Name:</label>
                     <input type="text" name="name" id="name" onChange={this.handleChange} defaultValue={todoList.name} />
