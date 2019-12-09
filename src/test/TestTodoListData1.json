@@ -1,0 +1,63 @@
+{
+    "users": [
+        {
+            "key": 0,
+            "email": "admin@gmail.com",
+            "firstName": "Bob",
+            "initials": "BL",
+            "lastName": "Lee",
+            "isAdmin": true,
+            "wireframes": [
+                {
+                    "key": 0,
+                    "height": 100,
+                    "width": 100,
+                    "zoom": 1,
+                    "controls": [
+                        {
+                            "controlType": "container",
+                            "height": 50,
+                            "width": 50,
+                            "text": "test",
+                            "font": "Arial",
+                            "text_color": "Black",
+                            "font_color": "White",
+                            "background_color": "Blue",
+                            "border_color": "Black"
+                        }
+                    ]
+                },
+                {
+                    "key": 1,
+                    "controls": [
+                        
+                    ]
+                },
+                {
+                    "key": 2,
+                    "controls": [
+                        
+                    ]
+                }
+            ]
+        },
+        {
+            "key": 1,
+            "name": "Josh",
+            "wireframes": [
+                {
+                    "key": 0,
+                    "controls": [
+  
+                    ]
+                },
+                {
+                    "key": 1,
+                    "controls": [
+                        
+                    ]
+                }
+            ]
+        }
+    ]
+}

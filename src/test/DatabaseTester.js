@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import todoJson from './TestTodoListData.json'
+import todoJson from './TestTodoListData1.json'
 import { getFirestore } from 'redux-firestore';
 
 class DatabaseTester extends React.Component {
@@ -10,29 +10,43 @@ class DatabaseTester extends React.Component {
     // TO LOG IN
     handleClear = () => {
         const fireStore = getFirestore();
-        fireStore.collection('todoLists').get().then(function(querySnapshot){
+        const { firebase } = this.props;
+        fireStore.collection('users').get().then(function(querySnapshot){
             querySnapshot.forEach(function(doc) {
-                console.log("deleting " + doc.id);
-                fireStore.collection('todoLists').doc(doc.id).delete();
+                console.log("clearing " + doc.id);
+                fireStore.collection('users').doc(doc.id).update({
+                        wireframes: []
+                    }).then(() => {
+                        console.log("DATABASE RESET");
+                    }).catch((err) => {
+                        console.log(err);
+                    });
             })
         });
     }
 
     handleReset = () => {
         const fireStore = getFirestore();
-        todoJson.todoLists.forEach(todoListJson => {
-            fireStore.collection('todoLists').add({
-                    name: todoListJson.name,
-                    owner: todoListJson.owner,
-                    items: todoListJson.items,
-                    created: new Date()
-                }).then(() => {
-                    console.log("DATABASE RESET");
-                }).catch((err) => {
-                    console.log(err);
+        const { firebase } = this.props;
+        fireStore.collection('users').get().then(function(querySnapshot){
+            querySnapshot.forEach(function(doc) {
+                console.log("clearing " + doc.id);
+                todoJson.users.forEach(todoListJson => {
+                    if(doc.data().email === todoListJson.email){
+                        fireStore.collection('users').doc(doc.id).update({
+                                isAdmin: todoListJson.isAdmin, 
+                                wireframes: todoListJson.wireframes
+                            }).then(() => {
+                                console.log("DATABASE RESET");
+                            }).catch((err) => {
+                                console.log(err);
+                            });
+                    }
                 });
+            })
         });
     }
+
 
     render() {
         return (
