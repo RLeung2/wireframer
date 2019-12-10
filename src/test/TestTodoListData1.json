@@ -9,6 +9,7 @@
             "isAdmin": true,
             "wireframes": [
                 {
+                    "name": "wireframe1",
                     "key": 0,
                     "height": 100,
                     "width": 100,

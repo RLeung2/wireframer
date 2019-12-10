@@ -199,51 +199,57 @@ class ListScreen extends Component {
     }
 
     render() {
-        const auth = this.props.auth;
-        const todoList = this.props.todoList;
-        if (!auth.uid) {
-            return <Redirect to="/" />;
-        }
-
-        if(!todoList)
-	        return <React.Fragment />
-
         return (
-            <div className="container todo-list">
-                <br />
-                <div className="list-heading-container">
-                    <h5 className="grey-text text-darken-3 list-heading">Todo List</h5>
-                    <Modal header="Modal Header" trigger={trigger}>
-                        Are you sure you want to delete this list?   
-                        <button onClick={this.handleDeleteList}>Yes</button>
-                    </Modal>
-                </div>
-                <br />
-                <br />
-                <br />
-                <div className="input-field">
-                    <label htmlFor="email" className="active">Name:</label>
-                    <input type="text" name="name" id="name" onChange={this.handleChange} defaultValue={todoList.name} />
-                </div>
-                <div className="input-field">
-                    <label htmlFor="password" className="active">Owner:</label>
-                    <input type="text" name="owner" id="owner" onChange={this.handleChange} defaultValue={todoList.owner} />
-                </div>
-                <div id="list-items-container">
-                    <div className="list_item_header_card">
-                        <div className="list_item_task_header" onClick={this.handleSortByTask}>
-                            Task
-                        </div>
-                        <div className="list_item_due_date_header" onClick={this.handleSortByDueDate}>
-                            Due Date
-                        </div>
-                        <div className="list_item_status_header" onClick={this.handleSortByStatus}>
-                            Status
-                        </div>
-                    </div>
+            <div className="card z-depth-0 wireframer">
+                <div className = "wireframeEditor">
 
-                    <ItemsList handleMoveUp={this.handleMoveUp} handleMoveDown={this.handleMoveDown} handleDeleteItem={this.handleDeleteItem} todoList={todoList} />
-                </div> 
+                  <div className = "wireframeFinalize">
+                    
+                    <button>Save</button>
+                    <button>Close</button>
+                  </div>
+
+                  <div>
+                    <div>Height: <input type="number"></input></div>
+                    <div>Width: <input type="number"></input></div>
+                  </div>
+
+                  <div>
+                    <button><div className = "container_wireframe"></div></button>
+                    <div>Container </div>
+                  </div>
+
+                  <div>
+                    <button><label>Label</label></button>
+                    <div>Label </div>
+                  </div>
+
+                  <div>
+                    <button><button>Button</button></button>
+                    <div>Button </div>
+                  </div>
+
+                  <div>
+                    <button> <input type = "text"></input> </button>
+                    <div>Textfield </div>
+                  </div>
+
+                </div>
+
+                <div className = "wireframeCanvas">
+                  <div>
+                  </div>
+                </div>
+
+                <div className = "controls">
+                  <div>Properties: </div>
+                  <div> Font Size: <input type="number"></input></div>
+                  <div> Font Color: <input type="color"></input></div>
+                  <div> Background Color: <input type="color"></input></div>
+                  <div> Border Color: <input type="color"></input></div>
+                  <div> Border Thickness: <input type="number"></input></div>
+                  <div> Border Radius: <input type="number"></input></div>
+                </div>
             </div>
         );
     }
