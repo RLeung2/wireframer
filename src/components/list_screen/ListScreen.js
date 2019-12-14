@@ -2,14 +2,21 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import ItemsList from './ItemsList.js'
 import { firestoreConnect } from 'react-redux-firebase';
+import zoomIn from '../../images/zoomin.png';
+import zoomOut from '../../images/zoomout.png';
+import Canvas from './Canvas.js';
+import { saveHandler } from '../../store/database/asynchHandler';
+
 
 class ListScreen extends Component {
     state = {
+        controlsArr:  JSON.parse(JSON.stringify(this.props.wireframe.controls)),
+        height: '',
+        width: '',
         name: '',
-        owner: '',
-    }
+        selectedControl: -1,
+      }  
 
     handleChange = (e) => {
         const { target } = e;
@@ -32,7 +39,8 @@ class ListScreen extends Component {
                 <div className = "wireframeEditor">
 
                   <div className = "wireframeFinalize">
-
+                    <img className = "zoom" src = {zoomIn}/>
+                    <img className = "zoom" src = {zoomOut} />
                     <button>Save</button>
                     <button>Close</button>
                   </div>
