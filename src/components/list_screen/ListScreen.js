@@ -52,6 +52,12 @@ class ListScreen extends Component {
                 console.log("Error getting document:", error);
             });
         }
+        var height = document.getElementById("height");
+        var width = document.getElementById("width");
+        var { wireframe } = this.props;
+        height.value = wireframe.height;
+        width.value = wireframe.width;
+
     }
   
     componentWillUnmount() {
@@ -60,12 +66,34 @@ class ListScreen extends Component {
   
     handleChange = (e) => {
         const { target } = e;
-
+  
         this.setState(state => ({
             ...state,
             [target.id]: target.value,
-        }));
+        }), () => {
+            // callback to action creator to change the data in the db
+            console.log("handle name change");
+            const fireStore = getFirestore();
+            const ref = fireStore.collection('users').doc(this.props.auth.uid);
+            const { id } = this.props;
+            const name = this.state.name;
+            ref.get().then(function(doc) {
+              if (doc.exists) {
+                var wireframes = doc.data().wireframes;
+                console.log("da name is " + wireframes[id].name);
+                wireframes[id].name = name;
+                fireStore.collection('users').doc(doc.id).update({
+                  wireframes: wireframes
+                }).catch((err) => {
+                  console.log(err);
+                });
+              }
+            }).catch(function(error) {
+                console.log("Error getting document:", error);
+            });
+        });
     }
+  
 
     handleSave = (e) => {
         e.preventDefault();
@@ -199,12 +227,17 @@ class ListScreen extends Component {
     
     render() {
         const auth = this.props.auth;
+        const wireframe = this.props.wireframe;
         if (!auth.uid) {
             return <Redirect to="/" />;
         }
 
         return (
             <div className="card z-depth-0 wireframer">
+                <div className="input-field">
+                    <label htmlFor="email" className="active">Name:</label>
+                    <input type="text" name="name" id="name" onChange={this.handleChange} defaultValue={wireframe.name} />
+                </div>
                 <div className = "wireframeEditor">
 
                   <div className = "wireframeFinalize">
@@ -243,14 +276,15 @@ class ListScreen extends Component {
 
                 </div>
 
-                <Canvas 
-                  controlsArr={this.state.controlsArr}
-                  selectControl={this.selectControl} 
-                  repositionControl={this.repositionControl}
-                  resizeControl={this.resizeControl}
-                  >
-
-                  </Canvas>
+                <div className = 'canvasContainer'>
+                    <Canvas 
+                        controlsArr={this.state.controlsArr}
+                        selectControl={this.selectControl} 
+                        repositionControl={this.repositionControl}
+                        resizeControl={this.resizeControl}
+                    >
+                    </Canvas>
+                </div>
 
                 <div className = "controls">
                   <div> Properties: </div>
@@ -269,15 +303,14 @@ class ListScreen extends Component {
 const mapStateToProps = (state, ownProps) => {
     const { id } = ownProps.match.params;
     const wireframes = state.firebase.profile.wireframes;
-    console.log(wireframes)
     const wireframe = wireframes ? wireframes[id] : null;
-    console.log(wireframe)
     if(wireframe)
       wireframe.id = id;
   
     return {
       wireframe,
       wireframes,
+      id,
       profile: state.firebase.auth,
       auth: state.firebase.auth,
     };

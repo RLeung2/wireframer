@@ -142,7 +142,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
 
 .wireframer {
   position: relative;
-  height: 475px;
+  height: 675px;
   grid-row-gap: 0px;
   grid-column-gap: 50px;
   margin-top: 0px;
@@ -152,7 +152,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
 
 .wireframeEditor {
   position: absolute;
-  height:100%;
+  height: 100%;
   width: 20%;
   /* left: 2%; */
   border-color: black;
@@ -161,7 +161,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
 
 .wireframeCanvas {
   position: absolute;
-  height:100%;
+  height:90%;
   left:20%;
   width: 60%;
   /* left: 25%; */

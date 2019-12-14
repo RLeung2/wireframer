@@ -12,7 +12,7 @@ class TodoListLinks extends React.Component {
         return (
             <div className="todo-lists section">
                 {wireframes && wireframes.map((wireframe, index) => (
-                    <Link to={'/todoList/' + index} key={index}>
+                    <Link to={'/wireframe/' + index} key={index}>
                         <TodoListCard wireframe={wireframe} id={index}/>
                     </Link>
                 ))}
