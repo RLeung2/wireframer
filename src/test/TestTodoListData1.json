@@ -12,8 +12,8 @@
                 {
                     "name": "wireframe1",
                     "key": 0,
-                    "height": 1000,
-                    "width": 1000,
+                    "height": 3000,
+                    "width": 3000,
                     "zoom": 1,
                     "controls": [
                         
@@ -21,9 +21,9 @@
                 },
                 {
                     "name": "wireframe2",
-                    "key": 0,
-                    "height": 1000,
-                    "width": 1000,
+                    "key": 1,
+                    "height": 3000,
+                    "width": 3000,
                     "zoom": 1,
                     "controls": [
                         
@@ -31,9 +31,9 @@
                 },
                 {
                     "name": "wireframe3",
-                    "key": 0,
-                    "height": 1000,
-                    "width": 1000,
+                    "key": 2,
+                    "height": 2500,
+                    "width": 2500,
                     "zoom": 1,
                     "controls": [
                         

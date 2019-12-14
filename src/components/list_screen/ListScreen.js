@@ -5,14 +5,13 @@ import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import zoomIn from '../../images/zoomin.png';
 import zoomOut from '../../images/zoomout.png';
-import Canvas from './Canvas.js';
 import { saveHandler } from '../../store/database/asynchHandler';
 import { createFirestoreInstance, reduxFirestore, getFirestore } from 'redux-firestore';
 import Draggable from 'react-draggable';
 import ReactPanZoom from "@ajainarayanan/react-pan-zoom";
 import Control from './Control.js';
 import { goHomeHandler} from '../../store/database/asynchHandler';
-import Modal from 'react-modal';
+import { Modal, Button } from 'react-materialize';
 
 
 class ListScreen extends Component {
@@ -32,6 +31,7 @@ class ListScreen extends Component {
     componentDidMount() {
         console.log("MOUNT: \n");
         console.log(this.state);
+        document.addEventListener('keydown', this.keysHandler);
         
         document.getElementById("wireframeCanvas").style.height = (this.state.height * 600/5000) + "px";
         document.getElementById("wireframeCanvas").style.width = (this.state.width * 600/5000) + "px";
@@ -271,7 +271,7 @@ class ListScreen extends Component {
     }
 
     saveModal = (e) => {
-      this.save(e);
+      this.handleSave(e);
       this.props.history.push('/');
     }
 
