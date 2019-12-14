@@ -2,7 +2,7 @@
     "users": [
         {
             "key": 0,
-            "email": "admin@gmail.com",
+            "email": "admin1@gmail.com",
             "password": "admin123",
             "firstName": "Admin",
             "initials": "AL",

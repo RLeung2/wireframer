@@ -40,7 +40,6 @@ class DatabaseTester extends React.Component {
                                 password: todoListJson.password,
                                 isAdmin: todoListJson.isAdmin, 
                                 wireframes: todoListJson.wireframes,
-                                key: todoListJson.key,
                             }).then(() => {
                                 console.log("DATABASE RESET");
                             }).catch((err) => {
