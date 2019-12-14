@@ -14,6 +14,7 @@ class HomeScreen extends Component {
 
         const fireStore = getFirestore();
         const ref = fireStore.collection('users').doc(this.props.auth.uid);
+        const history = this.props.history;
         ref.get().then(function(doc) {
             if (doc.exists) {
                 console.log("Document data:", doc.data().wireframes);
@@ -21,8 +22,8 @@ class HomeScreen extends Component {
                 var new_wireframe = {
                     "key": uuid.v4(),
                     "name": "Unknown",
-                    "height": "500",
-                    "width": "500",
+                    "height": "3500",
+                    "width": "3500",
                     "zoom": 1,
                     "created": new Date(),
                     "controls": []
@@ -32,6 +33,7 @@ class HomeScreen extends Component {
                     wireframes: wireframes
                 }).then(() => {
                     console.log("Added a new wireframe");
+                    history.push('/wireframe/0')
                 }).catch((err) => {
                     console.log(err);
                 });
@@ -41,8 +43,6 @@ class HomeScreen extends Component {
         }).catch(function(error) {
             console.log("Error getting document:", error);
         });
-
-        this.props.history.push('/wireframe/0')
     }
 
     render() {
