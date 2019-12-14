@@ -159,11 +159,23 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   border-style: solid;
 }
 
-.wireframeCanvas {
+.canvasContainer {
   position: absolute;
-  height:90%;
+  height:100%;
   left:20%;
   width: 60%;
+  /* left: 25%; */
+  border-color: black;
+  border-style: solid;
+}
+
+.wireframeCanvas {
+  position:absolute;
+  height: 500px;
+  width: 500px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
   /* left: 25%; */
   border-color: black;
   border-style: solid;
