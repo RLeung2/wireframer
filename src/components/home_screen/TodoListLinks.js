@@ -21,8 +21,9 @@ class TodoListLinks extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log(state)
     return {
-        todoLists: state.firestore.ordered.todoLists,
+        todoLists: state.firebase.profile.wireframes,
         auth: state.firebase.auth,
     };
 };
