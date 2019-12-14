@@ -10,8 +10,8 @@ class Control extends Component {
             size={{ width: this.props.control.width,  height: this.props.control.height }}
             position={{ x: this.props.control.posX, y: this.props.control.posY }}
             bounds="parent"
-            minWidth={this.props.control.width + 55}
-            minHeight={this.props.control.height + 18}
+            minWidth={70}
+            minHeight={40}
             style={{ borderStyle: 'solid', borderColor: 'black' }}
             onClick={(e) => this.props.selectControl(e, this.props.index)}
             onDragStop={(e, d) => this.props.repositionControl(this.props.index, d.x, d.y)}
@@ -27,8 +27,8 @@ class Control extends Component {
             size={{ width: this.props.control.width,  height: this.props.control.height }}
             position={{ x: this.props.control.posX, y: this.props.control.posY }}
             bounds="parent"
-            minWidth={this.props.control.width}
-            minHeight={this.props.control.height}
+            minWidth={70}
+            minHeight={40}
             style={{ borderStyle: 'solid', borderColor: 'black' }}
             onClick={(e) => this.props.selectControl(e, this.props.index)}
             onDragStop={(e, d) => this.props.repositionControl(this.props.index, d.x, d.y)}
@@ -44,8 +44,8 @@ class Control extends Component {
             size={{ width: this.props.control.width,  height: this.props.control.height }}
             position={{ x: this.props.control.posX, y: this.props.control.posY }}
             bounds="parent"
-            minWidth={this.props.control.width}
-            minHeight={this.props.control.height}
+            minWidth={70}
+            minHeight={40}
             style={{ borderStyle: 'solid', borderColor: 'black' }}
             onClick={(e) => this.props.selectControl(e, this.props.index)}
             onDragStop={(e, d) => this.props.repositionControl(this.props.index, d.x, d.y)}
@@ -61,8 +61,8 @@ class Control extends Component {
               size={{ width: this.props.control.width,  height: this.props.control.height }}
               position={{ x: this.props.control.posX, y: this.props.control.posY }}
               bounds="parent"
-              minWidth={this.props.control.width}
-              minHeight={this.props.control.height}
+              minWidth={70}
+              minHeight={40}
               style={{ borderStyle: 'solid', borderColor: 'black' }}
               onClick={(event) => this.props.selectControl(event, this.props.index)}
               onDragStop={(e, d) => this.props.repositionControl(this.props.index, d.x, d.y)}

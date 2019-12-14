@@ -132,26 +132,27 @@ class ListScreen extends Component {
     }
 
     copyControl = (index) => {
-        if(index !== -1){
-          var controlDupe = this.state.controlsArr[index];
-          controlDupe.posX -= 100;
-          controlDupe.posY -= 100;
-          if(controlDupe.posX < 0){
-            controlDupe.posX = 0;
-          }
-          if(controlDupe.posY < 0){
-            controlDupe.posX = 0;
-          }
-          var controlArrNew = this.state.controlsArr;
-          controlArrNew.push(controlDupe);
-          this.setState(state => ({
-            ...state,
-            controlsArr: controlArrNew,
-            selectControl: controlArrNew.length - 1,
-            madeChange: true,
-          }));
+      if(index !== -1){
+        var controlDupe = JSON.parse(JSON.stringify(this.state.controlsArr[index]));
+        controlDupe.posX -= 100;
+        controlDupe.posY -= 100;
+        if(controlDupe.posX < 0){
+          controlDupe.posX = 0;
         }
+        if(controlDupe.posY < 0){
+          controlDupe.posY = 0;
+        }
+        var controlArrNew = JSON.parse(JSON.stringify(this.state.controlsArr));
+        controlArrNew.push(controlDupe);
+               this.setState(state => ({
+          ...state,
+          controlsArr: controlArrNew,
+          selectedControl: controlArrNew.length - 1,
+          madeChange: true,
+        }));
+      }
     }
+
   
     deleteControl = (index) => {
         if(index !== -1){
@@ -232,16 +233,18 @@ class ListScreen extends Component {
     }
   
     resizeControl = (index, width, height) => {
-        var controlsArrNew = this.state.controlsArr;
-        var control = this.state.controlsArr[index];
-        control.width = width;
-        control.height = height;
-        controlsArrNew[index] = control;
-        this.setState(state => ({
-          ...state,
-          controlsArr: controlsArrNew
-        }));
+      var controlsArrNew = this.state.controlsArr;
+      var control = this.state.controlsArr[index];
+      control.width = Number(width.substring(0, width.length - 2));
+      control.height = Number(height.substring(0, height.length - 2));
+      controlsArrNew[index] = control;
+      this.setState(state => ({
+        ...state,
+        controlsArr: controlsArrNew,
+        madeChange: true,
+      }));
     }
+
 
     handleDimension = (e) => {
       const { target } = e;

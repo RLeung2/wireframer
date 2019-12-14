@@ -53,18 +53,28 @@ class DatabaseTester extends React.Component {
 
 
     render() {
-        return (
-            <div>
-                <button onClick={this.handleClear}>Clear Database</button>
-                <button onClick={this.handleReset}>Reset Database</button>
-            </div>)
+        const { profile } = this.props;
+        if(profile.isAdmin){
+            return (
+                <div>
+                    <button onClick={this.handleClear}>Clear Database</button>
+                    <button onClick={this.handleReset}>Reset Database</button>
+                </div>)
+        }else{
+            return(
+                <div>
+                    THAT'S FUNNY, YOU'RE NOT AND ADMIN!
+                </div>
+            )
+        }
     }
 }
 
 const mapStateToProps = function (state) {
     return {
         auth: state.firebase.auth,
-        firebase: state.firebase
+        firebase: state.firebase,
+        profile: state.firebase.profile,
     };
 }
 
