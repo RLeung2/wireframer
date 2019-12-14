@@ -28,17 +28,56 @@ class ListScreen extends Component {
         }
 
         return (
-            <div className="container white">
-                <h5 className="grey-text text-darken-3">Todo List</h5>
-                <div className="input-field">
-                    <label htmlFor="email">Name</label>
-                    <input className="active" type="text" name="name" id="name" onChange={this.handleChange} value={wireframe.name} />
+            <div className="card z-depth-0 wireframer">
+                <div className = "wireframeEditor">
+
+                  <div className = "wireframeFinalize">
+
+                    <button>Save</button>
+                    <button>Close</button>
+                  </div>
+
+                  <div>
+                    <div>Height: <input type="number"></input></div>
+                    <div>Width: <input type="number"></input></div>
+                  </div>
+
+                  <div>
+                    <button><div className = "container_wireframe"></div></button>
+                    <div>Container </div>
+                  </div>
+
+                  <div>
+                    <button><label>Label</label></button>
+                    <div>Label </div>
+                  </div>
+
+                  <div>
+                    <button><button>Button</button></button>
+                    <div>Button </div>
+                  </div>
+
+                  <div>
+                    <button> <input type = "text"></input> </button>
+                    <div>Textfield </div>
+                  </div>
+
                 </div>
-                <div className="input-field">
-                    <label htmlFor="password">Owner</label>
-                    <input className="active" type="text" name="owner" id="owner" onChange={this.handleChange} value={wireframe.owner} />
+
+                <div className = "wireframeCanvas">
+                  <div>
+                  </div>
                 </div>
-                <ItemsList wireframe={wireframe} />
+
+                <div className = "controls">
+                  <div>Properties: </div>
+                  <div> Font Size: <input type="number"></input></div>
+                  <div> Font Color: <input type="color"></input></div>
+                  <div> Background Color: <input type="color"></input></div>
+                  <div> Border Color: <input type="color"></input></div>
+                  <div> Border Thickness: <input type="number"></input></div>
+                  <div> Border Radius: <input type="number"></input></div>
+                </div>
             </div>
         );
     }
@@ -48,7 +87,7 @@ const mapStateToProps = (state, ownProps) => {
   const { id } = ownProps.match.params;
   const { wireframes } = state.firestore.data;
   const wireframe = wireframes ? wireframes[id] : null;
-  wireframe.id = id;
+  //wireframe.id = id;
 
   return {
     wireframe,
