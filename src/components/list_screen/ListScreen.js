@@ -8,11 +8,11 @@ import zoomOut from '../../images/zoomout.png';
 import Canvas from './Canvas.js';
 import { saveHandler } from '../../store/database/asynchHandler';
 import { createFirestoreInstance, reduxFirestore, getFirestore } from 'redux-firestore';
-import { updateDimensionsHandler } from '../../store/database/asynchHandler';
 import Draggable from 'react-draggable';
 import ReactPanZoom from "@ajainarayanan/react-pan-zoom";
 import Control from './Control.js';
 import { goHomeHandler} from '../../store/database/asynchHandler';
+import Modal from 'react-modal';
 
 
 class ListScreen extends Component {
@@ -20,49 +20,19 @@ class ListScreen extends Component {
         controlsArr: JSON.parse(JSON.stringify(this.props.wireframe.controls)),
         height: this.props.wireframe.height,
         width: this.props.wireframe.width,
-        name: '',
+        updatedHeight: this.props.wireframe.height,
+        updatedWidth: this.props.wireframe.width,
         selectedControl: -1,
         name: this.props.wireframe === undefined ? '' : this.props.wireframe.name,
         dimensionChange: false,
+        dimensionUpdated: false,
+        madeChange: false,
     }  
 
     componentDidMount() {
         console.log("MOUNT: \n");
         console.log(this.state);
-        /*document.addEventListener('keydown', this.keysHandler);
-
-        const { id } = this.props;
-        if(id != 0) {
-            // move to top
-            const fireStore = getFirestore();
-            const ref = fireStore.collection('users').doc(this.props.auth.uid);
-            ref.get().then(function(doc) {
-                if (doc.exists) {
-                    console.log("Document data:", doc.data().wireframes);
-                    var wireframes = doc.data().wireframes;
-                    console.log("index to prepend is " + id);
-                    const temp = wireframes[id];
-                    wireframes.splice(id, 1);
-                    wireframes.unshift(temp);
-                    fireStore.collection('users').doc(doc.id).update({
-                        wireframes: wireframes
-                    }).then(() => {
-                        console.log("Added a new wireframe");
-                    }).catch((err) => {
-                        console.log(err);
-                    });
-                } else {
-                    console.log("No such document!");
-                }
-            }).catch(function(error) {
-                console.log("Error getting document:", error);
-            });
-        }*/
-        //var height = document.getElementById("height");
-        //var width = document.getElementById("width");
-        //var { wireframe } = this.props;
-        //height.value = wireframe.height;
-        //width.value = wireframe.width;
+        
         document.getElementById("wireframeCanvas").style.height = (this.state.height * 600/5000) + "px";
         document.getElementById("wireframeCanvas").style.width = (this.state.width * 600/5000) + "px";
     }
@@ -102,18 +72,18 @@ class ListScreen extends Component {
     }
 
     handleNameChange = (e) => {
-        const { target } = e;
-        const { props } = this;
-        const { firebase, profile } = props;
-        const { wireframes } = this.props;
+      const { target } = e;
+      const { props } = this;
+      const { firebase, profile } = props;
+      const { wireframes } = this.props;
 
-        this.setState(state => ({
-            ...state,
-            [target.id]: target.value,
-        }))
+      this.setState(state => ({
+          ...state,
+          [target.id]: target.value,
+          madeChange: true,
+      }))
 
-        wireframes[props.wireframe.id].name = this.state.name;
-        props.updateNameChange(profile, wireframes, firebase);
+      wireframes[props.wireframe.id].name = this.state.name;
     }
 
     handleGoHome = () => {
@@ -138,7 +108,14 @@ class ListScreen extends Component {
         const { wireframes } = this.props;
         wireframes[props.wireframe.id].controls = this.state.controlsArr;
         wireframes[props.wireframe.id].name = this.state.name;
+
+        if (this.state.dimensionUpdated) {
+          wireframes[props.wireframe.id].height = this.state.updatedHeight;
+          wireframes[props.wireframe.id].width = this.state.updatedWidth;
+        }
+
         props.save(profile, wireframes, firebase);
+        this.setState({madeChange: false});
     }
 
     keysHandler = (event) => {
@@ -169,7 +146,9 @@ class ListScreen extends Component {
           controlArrNew.push(controlDupe);
           this.setState(state => ({
             ...state,
-            controlsArr: controlArrNew
+            controlsArr: controlArrNew,
+            selectControl: controlArrNew.length - 1,
+            madeChange: true,
           }));
         }
     }
@@ -181,7 +160,8 @@ class ListScreen extends Component {
           this.setState(state => ({
             ...state,
             controlsArr: controlArrNew,
-            selectedControl: -1
+            selectedControl: -1,
+            madeChange: true,
           }));
         }
     }
@@ -233,7 +213,8 @@ class ListScreen extends Component {
         controlsArrNew.push(control);
         this.setState(state => ({
           ...state,
-          controlsArr: controlsArrNew
+          controlsArr: controlsArrNew,
+          madeChange: true,
         }));
     }
 
@@ -245,7 +226,8 @@ class ListScreen extends Component {
         controlsArrNew[index] = control;
         this.setState(state => ({
           ...state,
-          controlsArr: controlsArrNew
+          controlsArr: controlsArrNew,
+          madeChange: true,
         }));
     }
   
@@ -262,13 +244,13 @@ class ListScreen extends Component {
     }
 
     handleDimension = (e) => {
-        const { target } = e;
+      const { target } = e;
 
-        this.setState(state => ({
-            ...state,
-            [target.id]: target.value,
-            dimensionChange: true,
-        }))
+      this.setState(state => ({
+          ...state,
+          [target.id]: target.value,
+          dimensionChange: true,
+      }))
     }
 
     handleUpdateDimensions = (e) => {
@@ -277,19 +259,29 @@ class ListScreen extends Component {
         const { props } = this;
         const { firebase, profile } = props;
         const { wireframes } = this.props;
+        
         if ((this.state.height>5000) || (this.state.height<1) || (this.state.width>5000) || (this.state.width<1)) {
             console.log("Invalid Dimensions")
         }
         else {
-            wireframes[props.wireframe.id].height = this.state.height;
-            wireframes[props.wireframe.id].width = this.state.width;
-            props.updateDimensions(profile, wireframes, firebase);
-            document.getElementById("wireframeCanvas").style.height = (this.state.height * 625/5000) + "px";
-            document.getElementById("wireframeCanvas").style.width = (this.state.width * 625/5000) + "px";
+            document.getElementById("wireframeCanvas").style.height = (this.state.updatedHeight * 625/5000) + "px";
+            document.getElementById("wireframeCanvas").style.width = (this.state.updatedWidth * 625/5000) + "px";
+            this.setState({dimensionUpdated: true, madeChange: true});
         }
+    }
+
+    saveModal = (e) => {
+      this.save(e);
+      this.props.history.push('/');
+    }
+
+    close = () => {
+      this.handleGoHome();
     }
     
     render() {
+        const close = <button id="close" onClick={this.close}>Close</button>;
+        const trigger = <button id="trig">Close</button>;
         const auth = this.props.auth;
         const wireframe = this.props.wireframe;
         const height = this.props.wireframe.height;
@@ -309,13 +301,21 @@ class ListScreen extends Component {
                   <div className = "wireframeFinalize">
                     <img className = "zoom" src = {zoomIn}/>
                     <img className = "zoom" src = {zoomOut} />
-                    <button onClick={this.handleSave}>Save</button>
-                    <button onClick={this.handleGoHome}>Close</button>
+                    <button disabled={!this.state.madeChange} onClick={this.handleSave}>Save</button>
+                    {
+                      this.state.madeChange ? 
+                      <Modal header="Unsaved Changes" trigger={this.state.madeChange ? trigger : null}>
+                        You have unsaved changes
+                        <button className="btn green lighten-1 z-depth-0" onClick={this.saveModal}>Save Changes</button>
+                        <button className="btn pink lighten-1 z-depth-0" onClick={this.close}>Close Without Saving</button>
+                      </Modal> 
+                      : close
+                    }
                   </div>
 
                   <div>
-                    <div>Height: <input type="number" name="height" id="height" defaultValue={height} onChange={this.handleDimension}></input></div>
-                    <div>Width: <input type="number" name="width" id="width" defaultValue={width} onChange={this.handleDimension}></input></div>
+                    <div>Height: <input type="number" id="updatedHeight" defaultValue={height} onChange={this.handleDimension}></input></div>
+                    <div>Width: <input type="number" id="updatedWidth" defaultValue={width} onChange={this.handleDimension}></input></div>
                     <button id="updateButton" disabled={!this.state.dimensionChange} onClick={this.handleUpdateDimensions}>Update Dimensions</button>
                   </div>
 
@@ -388,8 +388,6 @@ const mapStateToProps = (state, ownProps) => {
   
 const mapDispatchToProps = dispatch => ({
     save: (profile, wireframe, firebase) => dispatch(saveHandler(profile, wireframe, firebase)),
-    updateDimensions: (profile, wireframe, firebase) => dispatch(saveHandler(profile, wireframe, firebase)),
-    updateNameChange: (profile, wireframe, firebase) => dispatch(saveHandler(profile, wireframe, firebase)),
     goHome: (profile, wireframe, firebase) => dispatch(goHomeHandler(profile, wireframe, firebase))
 });
   
