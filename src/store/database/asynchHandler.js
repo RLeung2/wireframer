@@ -52,3 +52,12 @@ export const saveHandler = (profile, wireframe, firebase) => (dispatch, getState
       dispatch(actionCreators.saveSuccess);
   });
 }
+
+export const updateDimensionsHandler = (profile, wireframe, firebase) => (dispatch, getState, { getFirestore }) => {
+  const fireStore = getFirestore();
+  fireStore.collection('users').doc(profile.uid).update({
+    wireframes: wireframe
+  }).then(() => {
+      dispatch(actionCreators.saveSuccess);
+  });
+}

@@ -21,8 +21,8 @@ class HomeScreen extends Component {
                 var new_wireframe = {
                     "key": uuid.v4(),
                     "name": "Unknown",
-                    "height": "100%",
-                    "width": "100%",
+                    "height": "500",
+                    "width": "500",
                     "zoom": 1,
                     "created": new Date(),
                     "controls": []

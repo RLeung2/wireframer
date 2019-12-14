@@ -8,16 +8,19 @@ import zoomOut from '../../images/zoomout.png';
 import Canvas from './Canvas.js';
 import { saveHandler } from '../../store/database/asynchHandler';
 import { createFirestoreInstance, reduxFirestore, getFirestore } from 'redux-firestore';
+import { updateDimensionsHandler } from '../../store/database/asynchHandler';
+import Draggable from 'react-draggable';
 
 
 class ListScreen extends Component {
     state = {
         controlsArr: JSON.parse(JSON.stringify(this.props.wireframe.controls)),
-        height: '',
-        width: '',
+        height: this.props.wireframe.height,
+        width: this.props.wireframe.width,
         name: '',
         selectedControl: -1,
-        name: this.props.wireframe === undefined ? '' : this.props.wireframe.name
+        name: this.props.wireframe === undefined ? '' : this.props.wireframe.name,
+        dimensionChange: false,
     }  
 
     componentDidMount() {
@@ -52,12 +55,13 @@ class ListScreen extends Component {
                 console.log("Error getting document:", error);
             });
         }
-        var height = document.getElementById("height");
-        var width = document.getElementById("width");
-        var { wireframe } = this.props;
-        height.value = wireframe.height;
-        width.value = wireframe.width;
-
+        //var height = document.getElementById("height");
+        //var width = document.getElementById("width");
+        //var { wireframe } = this.props;
+        //height.value = wireframe.height;
+        //width.value = wireframe.width;
+        document.getElementById("wireframeCanvas").style.height = this.state.height + "px";
+        document.getElementById("wireframeCanvas").style.width = this.state.width + "px";
     }
   
     componentWillUnmount() {
@@ -224,10 +228,78 @@ class ListScreen extends Component {
           controlsArr: controlsArrNew
         }));
     }
+
+    handleDimension = (e) => {
+        const { target } = e;
+
+        this.setState(state => ({
+            ...state,
+            [target.id]: target.value,
+            dimensionChange: true,
+        }))
+    }
+
+    handleUpdateDimensions = (e) => {
+        e.preventDefault();
+  
+        console.log("hi");
+        const { props } = this;
+        const { firebase, profile } = props;
+        const { wireframes } = this.props;
+        wireframes[props.wireframe.id].height = this.state.height;
+        wireframes[props.wireframe.id].width = this.state.width;
+        props.updateDimensions(profile, wireframes, firebase);
+        document.getElementById("wireframeCanvas").style.height = this.state.height + "px";
+        document.getElementById("wireframeCanvas").style.width = this.state.width + "px";
+        console.log(document.getElementById("wireframeCanvas"));
+    }
+
+    /*dragElement(elmnt) {
+        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        if (document.getElementById(elmnt.id + "header")) {
+          // if present, the header is where you move the DIV from:
+          document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+        } else {
+          // otherwise, move the DIV from anywhere inside the DIV:
+          elmnt.onmousedown = dragMouseDown;
+        }
+    }
+      
+    dragMouseDown(e) {
+          e = e || window.event;
+          e.preventDefault();
+          // get the mouse cursor position at startup:
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+          document.onmouseup = closeDragElement;
+          // call a function whenever the cursor moves:
+          document.onmousemove = elementDrag;
+    }
+      
+    elementDrag(e) {
+          e = e || window.event;
+          e.preventDefault();
+          // calculate the new cursor position:
+          pos1 = pos3 - e.clientX;
+          pos2 = pos4 - e.clientY;
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+          // set the element's new position:
+          elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+          elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    }
+      
+    closeDragElement() {
+          // stop moving when mouse button is released:
+          document.onmouseup = null;
+          document.onmousemove = null;
+    }*/
     
     render() {
         const auth = this.props.auth;
         const wireframe = this.props.wireframe;
+        const height = this.props.wireframe.height;
+        const width = this.props.wireframe.width;
         if (!auth.uid) {
             return <Redirect to="/" />;
         }
@@ -248,8 +320,9 @@ class ListScreen extends Component {
                   </div>
 
                   <div>
-                    <div>Height: <input type="number" id="height"></input></div>
-                    <div>Width: <input type="number" id="width"></input></div>
+                    <div>Height: <input type="number" name="height" id="height" defaultValue={height} onChange={this.handleDimension}></input></div>
+                    <div>Width: <input type="number" name="width" id="width" defaultValue={width} onChange={this.handleDimension}></input></div>
+                    <button id="updateButton" disabled={!this.state.dimensionChange} onClick={this.handleUpdateDimensions}>Update Dimensions</button>
                   </div>
 
                   <div>
@@ -277,13 +350,13 @@ class ListScreen extends Component {
                 </div>
 
                 <div className = 'canvasContainer'>
-                    <Canvas 
-                        controlsArr={this.state.controlsArr}
-                        selectControl={this.selectControl} 
-                        repositionControl={this.repositionControl}
-                        resizeControl={this.resizeControl}
-                    >
-                    </Canvas>
+                        <Canvas 
+                            controlsArr={this.state.controlsArr}
+                            selectControl={this.selectControl} 
+                            repositionControl={this.repositionControl}
+                            resizeControl={this.resizeControl}
+                        >
+                        </Canvas>
                 </div>
 
                 <div className = "controls">
@@ -318,6 +391,7 @@ const mapStateToProps = (state, ownProps) => {
   
 const mapDispatchToProps = dispatch => ({
     save: (profile, wireframe, firebase) => dispatch(saveHandler(profile, wireframe, firebase)),
+    updateDimensions: (profile, wireframe, firebase) => dispatch(saveHandler(profile, wireframe, firebase))
 });
   
 export default compose(
