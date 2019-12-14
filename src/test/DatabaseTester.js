@@ -34,8 +34,13 @@ class DatabaseTester extends React.Component {
                 todoJson.users.forEach(todoListJson => {
                     if(doc.data().email === todoListJson.email){
                         fireStore.collection('users').doc(doc.id).update({
+                                firstName: todoListJson.firstName,
+                                lastName: todoListJson.lastName,
+                                initials: todoListJson.initials,
+                                password: todoListJson.password,
                                 isAdmin: todoListJson.isAdmin, 
-                                wireframes: todoListJson.wireframes
+                                wireframes: todoListJson.wireframes,
+                                key: todoListJson.key,
                             }).then(() => {
                                 console.log("DATABASE RESET");
                             }).catch((err) => {

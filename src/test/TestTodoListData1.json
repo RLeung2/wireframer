@@ -3,8 +3,9 @@
         {
             "key": 0,
             "email": "admin@gmail.com",
-            "firstName": "Bob",
-            "initials": "BL",
+            "password": "admin123",
+            "firstName": "Admin",
+            "initials": "AL",
             "lastName": "Lee",
             "isAdmin": true,
             "wireframes": [

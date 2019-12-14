@@ -173,14 +173,13 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   position: absolute;
   height: 500px;
   width: 500px;
-  left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
   /* left: 25%; */
   border-color: black;
   border-style: solid;
   z-index: 0;
-  cursor: move;
 }
 
 .controls {

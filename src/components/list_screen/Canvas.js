@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Control from './Control.js'
 import Draggable from 'react-draggable';
+import ReactPanZoom from "@ajainarayanan/react-pan-zoom";
 
 class Canvas extends Component {
     state = {
@@ -11,8 +12,7 @@ class Canvas extends Component {
     }
 
     render() {
-        return (     
-            <Draggable>
+        return (    
                 <div id="wireframeCanvas" className = "wireframeCanvas" onClick={(e) => this.props.selectControl(e, -1)}>
                 {this.props.controlsArr.map((control, index) => (
                     <Control 
@@ -23,7 +23,6 @@ class Canvas extends Component {
                         resizeControl={this.props.resizeControl}/>
                     ))}
                 </div>
-            </Draggable>
         );
     }
 }

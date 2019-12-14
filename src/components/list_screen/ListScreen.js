@@ -10,6 +10,8 @@ import { saveHandler } from '../../store/database/asynchHandler';
 import { createFirestoreInstance, reduxFirestore, getFirestore } from 'redux-firestore';
 import { updateDimensionsHandler } from '../../store/database/asynchHandler';
 import Draggable from 'react-draggable';
+import ReactPanZoom from "@ajainarayanan/react-pan-zoom";
+import Control from './Control.js';
 
 
 class ListScreen extends Component {
@@ -60,8 +62,8 @@ class ListScreen extends Component {
         //var { wireframe } = this.props;
         //height.value = wireframe.height;
         //width.value = wireframe.width;
-        document.getElementById("wireframeCanvas").style.height = this.state.height + "px";
-        document.getElementById("wireframeCanvas").style.width = this.state.width + "px";
+        document.getElementById("wireframeCanvas").style.height = (this.state.height * 600/5000) + "px";
+        document.getElementById("wireframeCanvas").style.width = (this.state.width * 600/5000) + "px";
     }
   
     componentWillUnmount() {
@@ -242,16 +244,14 @@ class ListScreen extends Component {
     handleUpdateDimensions = (e) => {
         e.preventDefault();
   
-        console.log("hi");
         const { props } = this;
         const { firebase, profile } = props;
         const { wireframes } = this.props;
         wireframes[props.wireframe.id].height = this.state.height;
         wireframes[props.wireframe.id].width = this.state.width;
         props.updateDimensions(profile, wireframes, firebase);
-        document.getElementById("wireframeCanvas").style.height = this.state.height + "px";
-        document.getElementById("wireframeCanvas").style.width = this.state.width + "px";
-        console.log(document.getElementById("wireframeCanvas"));
+        document.getElementById("wireframeCanvas").style.height = (this.state.height * 600/5000) + "px";
+        document.getElementById("wireframeCanvas").style.width = (this.state.width * 600/5000) + "px";
     }
 
     /*dragElement(elmnt) {
@@ -350,13 +350,16 @@ class ListScreen extends Component {
                 </div>
 
                 <div className = 'canvasContainer'>
-                        <Canvas 
-                            controlsArr={this.state.controlsArr}
-                            selectControl={this.selectControl} 
+                    <div id="wireframeCanvas" className="wireframeCanvas" onClick={(e) => this.selectControl(e, -1)}>
+                        {this.state.controlsArr.map((control, index) => (
+                        <Control 
+                            index = {index} 
+                            control = {control}
+                            selectControl={this.selectControl}
                             repositionControl={this.repositionControl}
-                            resizeControl={this.resizeControl}
-                        >
-                        </Canvas>
+                            resizeControl={this.resizeControl}/>
+                        ))}
+                    </div>
                 </div>
 
                 <div className = "controls">
