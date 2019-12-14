@@ -3,36 +3,29 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import ItemCard from './ItemCard';
 import { firestoreConnect } from 'react-redux-firebase';
-import { Link } from 'react-router-dom';
 
 class ItemsList extends React.Component {
     render() {
-        const todoList = this.props.todoList;
-        const items = todoList.items;
-        const handleMoveUp = this.props.handleMoveUp;
-        const handleMoveDown = this.props.handleMoveDown;
-        const handleDeleteItem = this.props.handleDeleteItem;
-        console.log("ItemsList: todoList.id " + todoList.id);
+        const wireframe = this.props.wireframe;
+        const items = wireframe.items;
+        console.log("ItemsList: todoList.id " + wireframe.id);
         return (
             <div className="todo-lists section">
-                {items && items.map(function(item, index) {
+                {items && items.map(function(item) {
                     item.id = item.key;
                     return (
-                        <Link to={"/itemScreen/" + todoList.id + "/" + index}>
-                            <ItemCard handleMoveUp={handleMoveUp} handleMoveDown={handleMoveDown} handleDeleteItem={handleDeleteItem} todoList={todoList} item={item} index={index}/>
-                        </Link>
+                        <ItemCard wireframe={wireframe} item={item} />
                     );})
                 }
-                <Link to={"/itemScreen/" + todoList.id + "/" + items.length}><div className = "list_item_add_card center-align">&#x002B;</div></Link>
             </div>
         );
     }
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const todoList = ownProps.todoList;
+    const wireframe = ownProps.wireframe;
     return {
-        todoList,
+        wireframe,
         auth: state.firebase.auth,
     };
 };
@@ -40,6 +33,6 @@ const mapStateToProps = (state, ownProps) => {
 export default compose(
     connect(mapStateToProps),
     firestoreConnect([
-        { collection: 'todoLists'},
+        { collection: 'users' },
     ]),
 )(ItemsList);
