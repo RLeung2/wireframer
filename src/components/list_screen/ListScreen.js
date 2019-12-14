@@ -7,22 +7,51 @@ import zoomIn from '../../images/zoomin.png';
 import zoomOut from '../../images/zoomout.png';
 import Canvas from './Canvas.js';
 import { saveHandler } from '../../store/database/asynchHandler';
+import { createFirestoreInstance, reduxFirestore, getFirestore } from 'redux-firestore';
 
 
 class ListScreen extends Component {
     state = {
-        controlsArr: [],
-        //controlsArr: JSON.parse(JSON.stringify(this.props.wireframe.controls)),
+        controlsArr: JSON.parse(JSON.stringify(this.props.wireframe.controls)),
         height: '',
         width: '',
         name: '',
         selectedControl: -1,
+        name: this.props.wireframe === undefined ? '' : this.props.wireframe.name
     }  
 
     componentDidMount() {
         console.log("MOUNT: \n");
         console.log(this.state);
         document.addEventListener('keydown', this.keysHandler);
+
+        const { id } = this.props;
+        if(id != 0) {
+            // move to top
+            const fireStore = getFirestore();
+            const ref = fireStore.collection('users').doc(this.props.auth.uid);
+            ref.get().then(function(doc) {
+                if (doc.exists) {
+                    console.log("Document data:", doc.data().wireframes);
+                    var wireframes = doc.data().wireframes;
+                    console.log("index to prepend is " + id);
+                    const temp = wireframes[id];
+                    wireframes.splice(id, 1);
+                    wireframes.unshift(temp);
+                    fireStore.collection('users').doc(doc.id).update({
+                        wireframes: wireframes
+                    }).then(() => {
+                        console.log("Added a new wireframe");
+                    }).catch((err) => {
+                        console.log(err);
+                    });
+                } else {
+                    console.log("No such document!");
+                }
+            }).catch(function(error) {
+                console.log("Error getting document:", error);
+            });
+        }
     }
   
     componentWillUnmount() {
@@ -240,8 +269,9 @@ class ListScreen extends Component {
 const mapStateToProps = (state, ownProps) => {
     const { id } = ownProps.match.params;
     const wireframes = state.firebase.profile.wireframes;
+    console.log(wireframes)
     const wireframe = wireframes ? wireframes[id] : null;
-    console.log(id)
+    console.log(wireframe)
     if(wireframe)
       wireframe.id = id;
   
