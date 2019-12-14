@@ -16,17 +16,7 @@
                     "width": 100,
                     "zoom": 1,
                     "controls": [
-                        {
-                            "controlType": "container",
-                            "height": 50,
-                            "width": 50,
-                            "text": "test",
-                            "font": "Arial",
-                            "text_color": "Black",
-                            "font_color": "White",
-                            "background_color": "Blue",
-                            "border_color": "Black"
-                        }
+                        
                     ]
                 },
                 {

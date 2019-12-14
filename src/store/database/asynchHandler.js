@@ -64,3 +64,13 @@ export const updateDimensionsHandler = (profile, wireframe, firebase) => (dispat
       dispatch(actionCreators.saveSuccess);
   });
 }
+
+export const goHomeHandler = (profile, wireframe, firebase) => (dispatch, getState, { getFirestore }) => {
+  const fireStore = getFirestore();
+  fireStore.collection('users').doc(profile.uid).update({
+    wireframes: wireframe
+  }).then(() => {
+      dispatch(actionCreators.saveSuccess);
+      dispatch(actionCreators.goHome);
+  });
+}

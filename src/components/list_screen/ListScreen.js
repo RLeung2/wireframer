@@ -12,6 +12,7 @@ import { updateDimensionsHandler } from '../../store/database/asynchHandler';
 import Draggable from 'react-draggable';
 import ReactPanZoom from "@ajainarayanan/react-pan-zoom";
 import Control from './Control.js';
+import { goHomeHandler} from '../../store/database/asynchHandler';
 
 
 class ListScreen extends Component {
@@ -28,7 +29,7 @@ class ListScreen extends Component {
     componentDidMount() {
         console.log("MOUNT: \n");
         console.log(this.state);
-        document.addEventListener('keydown', this.keysHandler);
+        /*document.addEventListener('keydown', this.keysHandler);
 
         const { id } = this.props;
         if(id != 0) {
@@ -56,7 +57,7 @@ class ListScreen extends Component {
             }).catch(function(error) {
                 console.log("Error getting document:", error);
             });
-        }
+        }*/
         //var height = document.getElementById("height");
         //var width = document.getElementById("width");
         //var { wireframe } = this.props;
@@ -86,7 +87,7 @@ class ListScreen extends Component {
             ref.get().then(function(doc) {
               if (doc.exists) {
                 var wireframes = doc.data().wireframes;
-                console.log("da name is " + wireframes[id].name);
+                console.log("name is " + wireframes[id].name);
                 wireframes[id].name = name;
                 fireStore.collection('users').doc(doc.id).update({
                   wireframes: wireframes
@@ -99,7 +100,35 @@ class ListScreen extends Component {
             });
         });
     }
-  
+
+    handleNameChange = (e) => {
+        const { target } = e;
+        const { props } = this;
+        const { firebase, profile } = props;
+        const { wireframes } = this.props;
+
+        this.setState(state => ({
+            ...state,
+            [target.id]: target.value,
+        }))
+
+        wireframes[props.wireframe.id].name = this.state.name;
+        props.updateNameChange(profile, wireframes, firebase);
+    }
+
+    handleGoHome = () => {
+        const { id } = this.props;
+        const { props } = this;
+        const { firebase, profile } = props;
+        const { wireframes } = this.props;
+
+        const temp = wireframes[id];
+        wireframes.splice(id, 1);
+        wireframes.unshift(temp);
+        props.goHome(profile, wireframes, firebase);
+        console.log("HOME");
+        this.props.history.push('/');
+    }
 
     handleSave = (e) => {
         e.preventDefault();
@@ -108,6 +137,7 @@ class ListScreen extends Component {
         const { firebase, profile } = props;
         const { wireframes } = this.props;
         wireframes[props.wireframe.id].controls = this.state.controlsArr;
+        wireframes[props.wireframe.id].name = this.state.name;
         props.save(profile, wireframes, firebase);
     }
 
@@ -254,51 +284,10 @@ class ListScreen extends Component {
             wireframes[props.wireframe.id].height = this.state.height;
             wireframes[props.wireframe.id].width = this.state.width;
             props.updateDimensions(profile, wireframes, firebase);
-            document.getElementById("wireframeCanvas").style.height = (this.state.height * 600/5000) + "px";
-            document.getElementById("wireframeCanvas").style.width = (this.state.width * 600/5000) + "px";
+            document.getElementById("wireframeCanvas").style.height = (this.state.height * 625/5000) + "px";
+            document.getElementById("wireframeCanvas").style.width = (this.state.width * 625/5000) + "px";
         }
     }
-
-    /*dragElement(elmnt) {
-        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-        if (document.getElementById(elmnt.id + "header")) {
-          // if present, the header is where you move the DIV from:
-          document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-        } else {
-          // otherwise, move the DIV from anywhere inside the DIV:
-          elmnt.onmousedown = dragMouseDown;
-        }
-    }
-      
-    dragMouseDown(e) {
-          e = e || window.event;
-          e.preventDefault();
-          // get the mouse cursor position at startup:
-          pos3 = e.clientX;
-          pos4 = e.clientY;
-          document.onmouseup = closeDragElement;
-          // call a function whenever the cursor moves:
-          document.onmousemove = elementDrag;
-    }
-      
-    elementDrag(e) {
-          e = e || window.event;
-          e.preventDefault();
-          // calculate the new cursor position:
-          pos1 = pos3 - e.clientX;
-          pos2 = pos4 - e.clientY;
-          pos3 = e.clientX;
-          pos4 = e.clientY;
-          // set the element's new position:
-          elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-          elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-    }
-      
-    closeDragElement() {
-          // stop moving when mouse button is released:
-          document.onmouseup = null;
-          document.onmousemove = null;
-    }*/
     
     render() {
         const auth = this.props.auth;
@@ -313,7 +302,7 @@ class ListScreen extends Component {
             <div className="card z-depth-0 wireframer">
                 <div className="input-field">
                     <label htmlFor="email" className="active">Name:</label>
-                    <input type="text" name="name" id="name" onChange={this.handleChange} defaultValue={wireframe.name} />
+                    <input type="text" name="name" id="name" onChange={this.handleNameChange} defaultValue={wireframe.name} />
                 </div>
                 <div className = "wireframeEditor">
 
@@ -321,7 +310,7 @@ class ListScreen extends Component {
                     <img className = "zoom" src = {zoomIn}/>
                     <img className = "zoom" src = {zoomOut} />
                     <button onClick={this.handleSave}>Save</button>
-                    <button>Close</button>
+                    <button onClick={this.handleGoHome}>Close</button>
                   </div>
 
                   <div>
@@ -399,7 +388,9 @@ const mapStateToProps = (state, ownProps) => {
   
 const mapDispatchToProps = dispatch => ({
     save: (profile, wireframe, firebase) => dispatch(saveHandler(profile, wireframe, firebase)),
-    updateDimensions: (profile, wireframe, firebase) => dispatch(saveHandler(profile, wireframe, firebase))
+    updateDimensions: (profile, wireframe, firebase) => dispatch(saveHandler(profile, wireframe, firebase)),
+    updateNameChange: (profile, wireframe, firebase) => dispatch(saveHandler(profile, wireframe, firebase)),
+    goHome: (profile, wireframe, firebase) => dispatch(goHomeHandler(profile, wireframe, firebase))
 });
   
 export default compose(
