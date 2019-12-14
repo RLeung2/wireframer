@@ -12,6 +12,7 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const DELETE_SUCCESS = 'DELETE_SUCCESS';
+export const SAVE_SUCCESS = 'SAVE_SUCCESS';
 
 // THESE CREATORS MAKE ACTIONS ASSOCIATED WITH USER ACCOUNTS
 
@@ -55,5 +56,8 @@ export function deleteSuccess() {
     return { type: 'DELETE_SUCCESS' }
 };
 
+export function saveSuccess() {
+    return { type: 'SAVE_SUCCESS' }
+}
 
 

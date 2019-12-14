@@ -18,6 +18,7 @@ class TodoListCard extends React.Component {
 
     render() {
         const { wireframe } = this.props;
+        console.log(wireframe)
         console.log("TodoListCard, todoList.id: " + wireframe.id);
         return (
             <div className="card z-depth-0 todo-list-link">

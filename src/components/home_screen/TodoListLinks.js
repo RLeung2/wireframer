@@ -8,12 +8,12 @@ import { getFirestore } from 'redux-firestore';
 class TodoListLinks extends React.Component {
     render() {
         const wireframes = this.props.wireframes;
-        console.log(this.props);
+        console.log(wireframes);
         return (
             <div className="todo-lists section">
                 {wireframes && wireframes.map(wireframe => (
-                    <Link to={'/todoList/' + wireframe.id} key={wireframe.id}>
-                        <TodoListCard wireframe={wireframe} />
+                    <Link to={'/todoList/' + wireframe.index} key={wireframe.index}>
+                        <TodoListCard wireframe={wireframe} id={wireframe.index}/>
                     </Link>
                 ))}
             </div>

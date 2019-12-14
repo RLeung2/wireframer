@@ -43,3 +43,12 @@ export const deleteHandler = (profile, wireframe, firebase) => (dispatch, getSta
       dispatch(actionCreators.deleteSuccess);
   });
 }
+
+export const saveHandler = (profile, wireframe, firebase) => (dispatch, getState, { getFirestore }) => {
+  const fireStore = getFirestore();
+  fireStore.collection('users').doc(profile.uid).update({
+    wireframes: wireframe
+  }).then(() => {
+      dispatch(actionCreators.saveSuccess);
+  });
+}
