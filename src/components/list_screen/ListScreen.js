@@ -247,11 +247,16 @@ class ListScreen extends Component {
         const { props } = this;
         const { firebase, profile } = props;
         const { wireframes } = this.props;
-        wireframes[props.wireframe.id].height = this.state.height;
-        wireframes[props.wireframe.id].width = this.state.width;
-        props.updateDimensions(profile, wireframes, firebase);
-        document.getElementById("wireframeCanvas").style.height = (this.state.height * 600/5000) + "px";
-        document.getElementById("wireframeCanvas").style.width = (this.state.width * 600/5000) + "px";
+        if ((this.state.height>5000) || (this.state.height<1) || (this.state.width>5000) || (this.state.width<1)) {
+            console.log("Invalid Dimensions")
+        }
+        else {
+            wireframes[props.wireframe.id].height = this.state.height;
+            wireframes[props.wireframe.id].width = this.state.width;
+            props.updateDimensions(profile, wireframes, firebase);
+            document.getElementById("wireframeCanvas").style.height = (this.state.height * 600/5000) + "px";
+            document.getElementById("wireframeCanvas").style.width = (this.state.width * 600/5000) + "px";
+        }
     }
 
     /*dragElement(elmnt) {
