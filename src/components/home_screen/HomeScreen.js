@@ -54,7 +54,7 @@ class HomeScreen extends Component {
             <div className="dashboard container">
                 <div className="row">
                     <div className="col s12 m4">
-                        <TodoListLinks />
+                        <TodoListLinks history={this.props.history}/>
                     </div>
 
                     <div className="col s8">
