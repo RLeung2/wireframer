@@ -8,7 +8,7 @@ import { Modal, Button } from 'react-materialize';
 import { deleteHandler } from '../../store/database/asynchHandler';
 
 class TodoListLinks extends React.Component {
-    handleDeleteWireframe = (index, e) => {
+    handleDelete = (index, e) => {
         e.stopPropagation();
   
         const { props } = this;
@@ -36,7 +36,7 @@ class TodoListLinks extends React.Component {
                         
                         <Modal header="Unsaved Changes" trigger={del_button}>
                             Delete Wireframe?
-                            <button className="btn green lighten-1 z-depth-0" onClick={this.handleDeleteWireframe.bind(this, index)}>Yes</button>
+                            <button className="btn green lighten-1 z-depth-0" onClick={this.handleDelete.bind(this, index)}>Yes</button>
                         </Modal> 
                         <br /><br /><br /><br />
                     </div>

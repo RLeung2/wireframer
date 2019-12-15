@@ -170,6 +170,15 @@ class ListScreen extends Component {
     selectControl = (event, index) => {
         console.log(this.state);
         event.stopPropagation();
+
+        {this.state.controlsArr.map((control) => (
+          control.className -= "borderimg"
+        ))}
+        if (index !== -1){
+          this.state.controlsArr[index].className = "borderimg";
+          console.log(this.state.controlsArr[index].className);
+        }
+
         this.setState(state => ({
           ...state,
           selectedControl: index
@@ -208,7 +217,8 @@ class ListScreen extends Component {
           borderColor:"#ffffff",
           textColor:"#000000",
           borderThickness: 1,
-          borderRadius: 0 
+          borderRadius: 0,
+          className: "border"
         }
         var controlsArrNew = this.state.controlsArr;
         controlsArrNew.push(control);

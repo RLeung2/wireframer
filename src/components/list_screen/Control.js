@@ -13,6 +13,7 @@ class Control extends Component {
             minWidth={70}
             minHeight={40}
             style={{ borderStyle: 'solid', borderColor: 'black' }}
+            className = {this.props.control.className}
             onClick={(e) => this.props.selectControl(e, this.props.index)}
             onDragStop={(e, d) => this.props.repositionControl(this.props.index, d.x, d.y)}
             onResizeStop={(e, direction, ref, delta, position) => this.props.resizeControl(this.props.index, ref.style.width, ref.style.height)}
@@ -30,6 +31,7 @@ class Control extends Component {
             minWidth={70}
             minHeight={40}
             style={{ borderStyle: 'solid', borderColor: 'black' }}
+            className = {this.props.control.className}
             onClick={(e) => this.props.selectControl(e, this.props.index)}
             onDragStop={(e, d) => this.props.repositionControl(this.props.index, d.x, d.y)}
             onResizeStop={(e, direction, ref, delta, position) => this.props.resizeControl(this.props.index, ref.style.width, ref.style.height)}
@@ -47,6 +49,7 @@ class Control extends Component {
             minWidth={70}
             minHeight={40}
             style={{ borderStyle: 'solid', borderColor: 'black' }}
+            className = {this.props.control.className}
             onClick={(e) => this.props.selectControl(e, this.props.index)}
             onDragStop={(e, d) => this.props.repositionControl(this.props.index, d.x, d.y)}
             onResizeStop={(e, direction, ref, delta, position) => this.props.resizeControl(this.props.index, ref.style.width, ref.style.height)}
@@ -64,6 +67,7 @@ class Control extends Component {
               minWidth={70}
               minHeight={40}
               style={{ borderStyle: 'solid', borderColor: 'black' }}
+              className = {this.props.control.className}
               onClick={(event) => this.props.selectControl(event, this.props.index)}
               onDragStop={(e, d) => this.props.repositionControl(this.props.index, d.x, d.y)}
               onResizeStop={(e, direction, ref, delta, position) => this.props.resizeControl(this.props.index, ref.style.width, ref.style.height)}

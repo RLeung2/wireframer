@@ -207,4 +207,15 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   width: 40px;
 }
 
+.border {
+  border-style: "solid";
+  border-color: black;
+}
+
+.borderimg { 
+  border: 5px solid transparent;
+  padding: 0px;
+  border-image: url('../images/border.png') 30 stretch;
+}
+
 
