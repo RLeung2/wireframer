@@ -304,14 +304,15 @@ class ListScreen extends Component {
 
   changeControlText = (e) => {
       const { target } = e;
+      if (this.state.selectControl !== -1) {
+        let newControls = this.state.controlsArr;
+        newControls[this.state.selectControl].text = target.value;
 
-      let newControls = this.state.controlsArr;
-      newControls[this.state.selectControl].text = target.value;
-
-      this.setState(state => ({
-          ...state,
-          controlsArr: newControls,
-        }));
+        this.setState(state => ({
+            ...state,
+            controlsArr: newControls,
+          }));
+        }
   }
 
   setFontSize = () => {
@@ -326,13 +327,15 @@ class ListScreen extends Component {
   changeFontSize = (e) => {
       const { target } = e;
 
-      let newControls = this.state.controlsArr;
-      newControls[this.state.selectControl].font_size = Number(target.value);
+      if (this.state.selectControl !== -1) {
+        let newControls = this.state.controlsArr;
+        newControls[this.state.selectControl].font_size = Number(target.value);
 
-      this.setState(state => ({
-          ...state,
-          controlsArr: newControls,
-        }));
+        this.setState(state => ({
+            ...state,
+            controlsArr: newControls,
+          }));
+      }
   }
 
   setColor = (color_type) => {
@@ -355,6 +358,7 @@ class ListScreen extends Component {
   }
 
   changeColor = (color, color_type) => {
+    if (this.state.selectControl !== -1) {
       let newControls = this.state.controlsArr;
 
       if (color_type === "text") {
@@ -383,6 +387,7 @@ class ListScreen extends Component {
               controlsArr: newControls,
           }));
       }
+    }
   }
 
   setBorderThickness = () => {
@@ -397,13 +402,15 @@ class ListScreen extends Component {
   changeBorderThickness = (e) => {
       const { target } = e;
 
-      let newControls = this.state.controlsArr;
-      newControls[this.state.selectControl].border_thickness = Number(target.value);
+      if (this.state.selectControl !== -1) {
+        let newControls = this.state.controlsArr;
+        newControls[this.state.selectControl].border_thickness = Number(target.value);
 
-      this.setState(state => ({
-          ...state,
-          controlsArr: newControls,
-        }));
+        this.setState(state => ({
+            ...state,
+            controlsArr: newControls,
+          }));
+      }
   }
 
   setBorderRadius = () => {
@@ -418,13 +425,15 @@ class ListScreen extends Component {
   changeBorderRadius = (e) => {
       const { target } = e;
 
-      let newControls = this.state.controlsArr;
-      newControls[this.state.selectControl].border_radius = Number(target.value);
+      if (this.state.selectControl !== -1) {
+        let newControls = this.state.controlsArr;
+        newControls[this.state.selectControl].border_radius = Number(target.value);
 
-      this.setState(state => ({
-          ...state,
-          controlsArr: newControls,
-        }));
+        this.setState(state => ({
+            ...state,
+            controlsArr: newControls,
+          }));
+      }
     }
 
     
@@ -509,11 +518,12 @@ class ListScreen extends Component {
                     <div>Properties </div><br />
                     <div> Text: <input value={this.setTextValue()} onChange={this.changeControlText} type="text"></input></div><br />
                     <div> Font Size: <input value={this.setFontSize()} onChange={this.changeFontSize} type="number"></input></div><br />
-                    <div> Font Color: <SketchPicker color={this.setColor("text")} onChange={(color) => this.changeColor(color, "text")} className="color-picker" /></div><br />
-                    <div> Background: <SketchPicker color={this.setColor("background")} onChange={(color) => this.changeColor(color, "background")} className="color-picker" /></div><br />
-                    <div> Border Color: <SketchPicker color={this.setColor("border")} onChange={(color) => this.changeColor(color, "border")} className="color-picker" /></div><br />
-                    <div> Border Thickness: <input value={this.setBorderThickness()} onChange={this.changeBorderThickness} type="number"></input></div><br />
-                    <div> Border Radius: <input value={this.setBorderRadius()} onChange={this.changeBorderRadius} type="number"></input></div>
+                    <div className="font-color-name"> Font Color: </div><SketchPicker color={this.setColor("text")} onChange={(color) => this.changeColor(color, "text")} className="color-picker" /><br />
+                    <div className="background-name"> Background: </div><SketchPicker color={this.setColor("background")} onChange={(color) => this.changeColor(color, "background")} className="background-color-picker" /><br />
+                    <div className="font-color-name"> Border Color: </div><SketchPicker color={this.setColor("border")} onChange={(color) => this.changeColor(color, "border")} className="color-picker" /><br />
+                    <div className="border-name-1"> Border Thickness: </div><input value={this.setBorderThickness()} onChange={this.changeBorderThickness} type="number" className="border-input-field"></input><br />
+                    <div className="border-name"> Border Radius: </div><input value={this.setBorderRadius()} onChange={this.changeBorderRadius} type="number" className="border-input-field"></input>
+
                 </div>
             </div>
         );

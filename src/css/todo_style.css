@@ -40,7 +40,7 @@
 }
 
 body {
-  background-color: var(--swatch-foundation);
+  /*background-color: var(--swatch-foundation);*/
   font-family: 'Lexend Exa';
 }
 
@@ -51,8 +51,8 @@ body {
 
 div.banner {
   background-image: linear-gradient(to bottom,         
-  #b8b808, #636723);
-  color: white;
+  #E92F9F, #F9B0C7);
+  color: black;
   font-size: 48pt;
   border-color: black;
   border-width: 2px;
@@ -159,3 +159,22 @@ div.banner {
 {
   font-weight: bold;
 }
+
+.card-delete-button
+{
+  cursor: pointer;
+}
+
+.controls
+{
+  border-top-color: black;
+  border-right-color: black;
+  border-bottom-color: black;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-top-width: medium;
+  border-right-width: medium;
+  border-bottom-width: medium;
+}
+

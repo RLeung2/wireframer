@@ -218,4 +218,111 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   border-image: url('../images/border.png') 30 stretch;
 }
 
+.controls
+{
+  position: absolute;
+  height: 135%;
+  width: 40%;
+  left: 80%;
+}
 
+.wireframeEditor
+{
+  position: absolute;
+  height:100%;
+  width: 20%;
+}
+
+.color-picker
+{
+  float: left;
+  margin-left: 10px;
+}
+
+.background-color-picker
+{
+  margin-left: 250px;
+  
+}
+
+.container_control_button, .label_control_button, .textfield_control_button
+{
+  background-color: white;
+  border-style: none;
+}
+
+.container_control_button
+{
+  margin-left: 20px;
+}
+
+.container_control 
+{
+  height:60px;
+  width:120px;
+  border-radius: 5px;
+}
+
+.label_control
+{
+  font-size: 12pt;
+}
+
+.label_control_button
+{
+  width: 80%;
+  margin-left: 20px;
+}
+
+.button_control
+{
+  width: 80%;
+  margin-left: 20px;
+}
+
+.textfield_control_button
+{
+  padding: 25px;
+  margin-left: 8px;
+}
+
+.font-color-name
+{
+  margin-left: 11%;
+}
+
+.background-name
+{
+  margin-top: -55.9px;
+  padding-left: 59%;
+}
+
+.color-picker
+{
+  float: left;
+  margin-left: 10px;
+}
+
+.background-color-picker
+{
+  margin-left: 250px;
+  
+}
+
+.border-name
+{
+  margin-left: 51.4%;
+  margin-top: 0%;
+}
+
+.border-name-1
+{
+  margin-left: 51.4%;
+  margin-top: -11.5%;
+}
+
+.border-input-field
+{
+  width: 50% !important;
+  margin-left: 11.8px !important;
+}

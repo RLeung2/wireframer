@@ -12,6 +12,8 @@ class Control extends Component {
         borderColor: this.props.control.border_color,
         borderRadius: this.props.control.border_radius,
         display: 'inline-block',
+        height: '100%',
+        width: '100%',
       } 
 
       if (this.props.control.controlType === "button") {
@@ -44,7 +46,7 @@ class Control extends Component {
             onDragStop={(e, d) => this.props.repositionControl(this.props.index, d.x, d.y)}
             onResizeStop={(e, direction, ref, delta, position) => this.props.resizeControl(this.props.index, ref.style.width, ref.style.height)}
           >
-            <input type = "text" style={styleObject} defaultValue={this.props.control.text} ></input>
+            <input type = "text" style={styleObject} value={this.props.control.text} ></input>
           </Rnd>
         )
       }
