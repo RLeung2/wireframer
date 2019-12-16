@@ -4,6 +4,16 @@ import { Rnd } from 'react-rnd';
 class Control extends Component {
     render() {
       console.log(this.props.control);
+      let styleObject = {
+        fontSize: this.props.control.font_size,
+        color: this.props.control.text_color,
+        backgroundColor: this.props.control.background_color,
+        border: String(this.props.control.border_thickness) + 'px solid',
+        borderColor: this.props.control.border_color,
+        borderRadius: this.props.control.border_radius,
+        display: 'inline-block',
+      } 
+
       if (this.props.control.controlType === "button") {
         return (
           <Rnd
@@ -18,7 +28,7 @@ class Control extends Component {
             onDragStop={(e, d) => this.props.repositionControl(this.props.index, d.x, d.y)}
             onResizeStop={(e, direction, ref, delta, position) => this.props.resizeControl(this.props.index, ref.style.width, ref.style.height)}
           >
-            <button style={{ width: '100%', height: '100%'}}>{this.props.control.text}</button>
+            <button style={styleObject}>{this.props.control.text}</button>
           </Rnd>
         )
       }

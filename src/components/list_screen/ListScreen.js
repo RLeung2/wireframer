@@ -12,6 +12,7 @@ import ReactPanZoom from "@ajainarayanan/react-pan-zoom";
 import Control from './Control.js';
 import { goHomeHandler} from '../../store/database/asynchHandler';
 import { Modal, Button } from 'react-materialize';
+import { SketchPicker } from 'react-color';
 
 
 class ListScreen extends Component {
@@ -21,7 +22,7 @@ class ListScreen extends Component {
         width: this.props.wireframe.width,
         updatedHeight: this.props.wireframe.height,
         updatedWidth: this.props.wireframe.width,
-        selectedControl: -1,
+        selectControl: -1,
         name: this.props.wireframe === undefined ? '' : this.props.wireframe.name,
         dimensionChange: false,
         dimensionUpdated: false,
@@ -124,10 +125,10 @@ class ListScreen extends Component {
         event.stopImmediatePropagation();
         if(event.keyCode === 68 && event.ctrlKey){
             event.preventDefault();
-            this.copyControl(this.state.selectedControl);
+            this.copyControl(this.state.selectControl);
         }else if(event.keyCode === 46){
             event.preventDefault();
-            this.deleteControl(this.state.selectedControl);
+            this.deleteControl(this.state.selectControl);
         }
     }
 
@@ -147,7 +148,7 @@ class ListScreen extends Component {
                this.setState(state => ({
           ...state,
           controlsArr: controlArrNew,
-          selectedControl: controlArrNew.length - 1,
+          selectControl: controlArrNew.length - 1,
           madeChange: true,
         }));
       }
@@ -161,7 +162,7 @@ class ListScreen extends Component {
           this.setState(state => ({
             ...state,
             controlsArr: controlArrNew,
-            selectedControl: -1,
+            selectControl: -1,
             madeChange: true,
           }));
         }
@@ -181,7 +182,7 @@ class ListScreen extends Component {
 
         this.setState(state => ({
           ...state,
-          selectedControl: index
+          selectControl: index
         }));
     }
 
@@ -291,6 +292,141 @@ class ListScreen extends Component {
     close = () => {
       this.handleGoHome();
     }
+
+    setTextValue = () => {
+      if (this.state.selectControl === -1 || this.state.controlsArr[this.state.selectControl].control_type === "container") {
+          return ""
+      }
+      else {
+          return this.state.controlsArr[this.state.selectControl].text;
+      }
+  }
+
+  changeControlText = (e) => {
+      const { target } = e;
+
+      let newControls = this.state.controlsArr;
+      newControls[this.state.selectControl].text = target.value;
+
+      this.setState(state => ({
+          ...state,
+          controlsArr: newControls,
+        }));
+  }
+
+  setFontSize = () => {
+      if (this.state.selectControl === -1 || this.state.controlsArr[this.state.selectControl].control_type === "container") {
+          return ""
+      }
+      else {
+          return this.state.controlsArr[this.state.selectControl].font_size;
+      }
+  }
+
+  changeFontSize = (e) => {
+      const { target } = e;
+
+      let newControls = this.state.controlsArr;
+      newControls[this.state.selectControl].font_size = Number(target.value);
+
+      this.setState(state => ({
+          ...state,
+          controlsArr: newControls,
+        }));
+  }
+
+  setColor = (color_type) => {
+      if (this.state.selectControl === -1) {
+          return "#000";
+      }
+      else {
+          if (color_type === "text" && this.state.controlsArr[this.state.selectControl].control_type !== "container") {
+              return this.state.controlsArr[this.state.selectControl].text_color;
+          }
+          else {
+              if (color_type === "background") {
+                  return this.state.controlsArr[this.state.selectControl].background_color;
+              }
+              else {
+                  return this.state.controlsArr[this.state.selectControl].border_color;
+              }
+          }
+      }
+  }
+
+  changeColor = (color, color_type) => {
+      let newControls = this.state.controlsArr;
+
+      if (color_type === "text") {
+          newControls[this.state.selectControl].text_color = color.hex;
+
+          this.setState(state => ({
+              ...state,
+              controlsArr: newControls,
+          }));
+      }
+
+      if (color_type === "background") {
+          newControls[this.state.selectControl].background_color = color.hex;
+
+          this.setState(state => ({
+              ...state,
+              controlsArr: newControls,
+          }));
+      }
+      
+      if (color_type === "border") {
+          newControls[this.state.selectControl].border_color = color.hex;
+
+          this.setState(state => ({
+              ...state,
+              controlsArr: newControls,
+          }));
+      }
+  }
+
+  setBorderThickness = () => {
+      if (this.state.selectControl === -1) {
+          return ""
+      }
+      else {
+          return this.state.controlsArr[this.state.selectControl].border_thickness;
+      }
+  }
+
+  changeBorderThickness = (e) => {
+      const { target } = e;
+
+      let newControls = this.state.controlsArr;
+      newControls[this.state.selectControl].border_thickness = Number(target.value);
+
+      this.setState(state => ({
+          ...state,
+          controlsArr: newControls,
+        }));
+  }
+
+  setBorderRadius = () => {
+      if (this.state.selectControl === -1) {
+          return ""
+      }
+      else {
+          return this.state.controlsArr[this.state.selectControl].border_radius;
+      }
+  }
+
+  changeBorderRadius = (e) => {
+      const { target } = e;
+
+      let newControls = this.state.controlsArr;
+      newControls[this.state.selectControl].border_radius = Number(target.value);
+
+      this.setState(state => ({
+          ...state,
+          controlsArr: newControls,
+        }));
+    }
+
     
     render() {
         const close = <button id="close" onClick={this.close}>Close</button>;
@@ -370,13 +506,14 @@ class ListScreen extends Component {
                 </div>
 
                 <div className = "controls">
-                  <div> Properties: </div>
-                  <div> Font Size: <input type="number"></input></div>
-                  <div> Font Color: <input type="color"></input></div>
-                  <div> Background Color: <input type="color"></input></div>
-                  <div> Border Color: <input type="color"></input></div>
-                  <div> Border Thickness: <input type="number"></input></div>
-                  <div> Border Radius: <input type="number"></input></div>
+                    <div>Properties </div><br />
+                    <div> Text: <input value={this.setTextValue()} onChange={this.changeControlText} type="text"></input></div><br />
+                    <div> Font Size: <input value={this.setFontSize()} onChange={this.changeFontSize} type="number"></input></div><br />
+                    <div> Font Color: <SketchPicker color={this.setColor("text")} onChange={(color) => this.changeColor(color, "text")} className="color-picker" /></div><br />
+                    <div> Background: <SketchPicker color={this.setColor("background")} onChange={(color) => this.changeColor(color, "background")} className="color-picker" /></div><br />
+                    <div> Border Color: <SketchPicker color={this.setColor("border")} onChange={(color) => this.changeColor(color, "border")} className="color-picker" /></div><br />
+                    <div> Border Thickness: <input value={this.setBorderThickness()} onChange={this.changeBorderThickness} type="number"></input></div><br />
+                    <div> Border Radius: <input value={this.setBorderRadius()} onChange={this.changeBorderRadius} type="number"></input></div>
                 </div>
             </div>
         );
