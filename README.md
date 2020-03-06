@@ -69,10 +69,6 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 =======
-# todo_hw3
-CSE 316 Homework 3
->>>>>>> 47cfc840141ac821fabad65388e52a24d76dab54
-=======
 # wireframe
-CSE 316 HW5 - Wireframe
+Wireframe
 >>>>>>> 117fff695ca857964162e21715d0dd796d530c17
