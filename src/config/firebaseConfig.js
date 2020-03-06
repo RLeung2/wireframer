@@ -5,14 +5,14 @@ import 'firebase/auth';
 // THIS IS USED TO INITIALIZE THE firebase OBJECT
 // PUT YOUR FIREBASE PROJECT CONFIG STUFF HERE
 const firebaseConfig = {
-    apiKey: "AIzaSyCfKwGwCLzqTHn3okZFIV_WgXX2E8222lE",
-    authDomain: "wireframe-aa7a1.firebaseapp.com",
-    databaseURL: "https://wireframe-aa7a1.firebaseio.com",
-    projectId: "wireframe-aa7a1",
-    storageBucket: "wireframe-aa7a1.appspot.com",
-    messagingSenderId: "591783438283",
-    appId: "1:591783438283:web:efc839fd213bd4982c784e",
-    measurementId: "G-D377STCL08"
+    apiKey: "AIzaSyCRG0MRGtuyA0lhw95daVBs95JxAP8mU9s",
+    authDomain: "wireframe-7ba73.firebaseapp.com",
+    databaseURL: "https://wireframe-7ba73.firebaseio.com",
+    projectId: "wireframe-7ba73",
+    storageBucket: "wireframe-7ba73.appspot.com",
+    messagingSenderId: "716736296397",
+    appId: "1:716736296397:web:e326513e58290760170084",
+    measurementId: "G-M441Q9X9L3"
 };
 firebase.initializeApp(firebaseConfig);
 
