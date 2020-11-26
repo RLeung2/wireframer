@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/wireframer/static/css/main.f49b8f9d.chunk.css",
+    "main.js": "/wireframer/static/js/main.b7cfcf47.chunk.js",
+    "main.js.map": "/wireframer/static/js/main.b7cfcf47.chunk.js.map",
+    "runtime-main.js": "/wireframer/static/js/runtime-main.f311fdde.js",
+    "runtime-main.js.map": "/wireframer/static/js/runtime-main.f311fdde.js.map",
+    "static/js/2.517bdd8f.chunk.js": "/wireframer/static/js/2.517bdd8f.chunk.js",
+    "static/js/2.517bdd8f.chunk.js.map": "/wireframer/static/js/2.517bdd8f.chunk.js.map",
+    "index.html": "/wireframer/index.html",
+    "precache-manifest.733d7f66523adc5ec3e95d91b0fdfc82.js": "/wireframer/precache-manifest.733d7f66523adc5ec3e95d91b0fdfc82.js",
+    "service-worker.js": "/wireframer/service-worker.js",
+    "static/css/main.f49b8f9d.chunk.css.map": "/wireframer/static/css/main.f49b8f9d.chunk.css.map",
+    "static/media/todo_style.css": "/wireframer/static/media/UMBXrPdOoHOnxExyjdBeaiPdA4M5.e12c9c5a.woff2",
+    "static/media/todo_layout.css": "/wireframer/static/media/border.967655a8.png",
+    "static/media/zoomin.png": "/wireframer/static/media/zoomin.f774f8a4.png",
+    "static/media/zoomout.png": "/wireframer/static/media/zoomout.8ecc5e67.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f311fdde.js",
+    "static/js/2.517bdd8f.chunk.js",
+    "static/css/main.f49b8f9d.chunk.css",
+    "static/js/main.b7cfcf47.chunk.js"
+  ]
+}
