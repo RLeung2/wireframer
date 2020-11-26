@@ -1,0 +1,180 @@
+:root {
+  /* 
+      FIRST WE'LL DEFINE OUR SWATCHES, i.e. THE COMPLEMENTARY
+      COLORS THAT WE'LL USE TOGETHER IN MULTIPLE PLACES THAT
+      TOGETHER WILL MAKE UP A GIVEN THEME
+  */
+  --swatch-foundation:    #EEEEDD; /* USED FOR BODY BACKGROUND */
+  --swatch-primary:       #E6E6E6; /* DOMINANT COLOR, USED FOR MOST BACKGROUNDS */
+  --swatch-complement:    #E1E4CB; /* USED IN FORGROUND OF PRIMARY FOR TEXT AND BORDERS */
+  --swatch_contrast:      #111111; /* USED IN MOUSE-OVER SELECTION OF LARGE ELEMENTS */
+  --swatch-accent:        #669966; /* USED IN MOUSE-OVER SELECTION OF TEXT AND BORDERS */    
+  --my-font-family:          "Robaaaoto";
+  --bounceEasing: cubic-bezier(0.51, 0.92, 0.24, 1.15);
+}
+
+@font-face {
+  font-family: 'Lexend Exa';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lexend Exa Regular'), local('LexendExa-Regular'), url('./fonts/Lexend Exa/UMBXrPdOoHOnxExyjdBeaiLdA4M5.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+
+/* latin-ext */
+@font-face {
+  font-family: 'Lexend Exa';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lexend Exa Regular'), local('LexendExa-Regular'), url('./fonts/Lexend Exa/UMBXrPdOoHOnxExyjdBeaiPdA4M5.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+  font-family: 'Lexend Exa';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lexend Exa Regular'), local('LexendExa-Regular'), url('./fonts/Lexend Exa/UMBXrPdOoHOnxExyjdBeai3dAw.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+body {
+  /*background-color: var(--swatch-foundation);*/
+  font-family: 'Lexend Exa';
+}
+
+.dashboard, .todo-list
+{
+  background-color: var(--swatch-primary);
+}
+
+div.banner {
+  background-image: linear-gradient(to bottom,         
+  #E92F9F, #F9B0C7);
+  color: black;
+  font-size: 48pt;
+  border-color: black;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 10px;
+  padding-left: 10%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-right: 25%;
+}
+
+.home_new_list_button {
+  font-size: 32pt;
+}
+.home_new_list_button:hover {
+  box-shadow: 1px 2px;
+}
+
+.home_your_lists_container
+{
+  font-size: 36pt;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+.your_lists_heading
+{
+  font-size: 27pt;
+  font-weight: bolder;
+}
+
+.home_new_list_button
+{
+  font-size: 40pt;
+}
+
+.home_new_list_button:hover { 
+  box-shadow: 1px 2px;
+}
+
+.todo-list-link
+{
+  background-color: var(--swatch-boundary);
+}
+
+.list-heading
+{
+  font-size: 26pt;
+}
+
+.list-trash {
+  font-size: 44pt;
+}
+
+.list-trash:hover {
+  color: var(--swatch-accent);
+  cursor: pointer;
+}
+
+.list_item_header_card
+{
+  background-color: var(--swatch-accent);
+}
+
+.list_item_task_header, .list_item_due_date_header, .list_item_status_header {
+  font-weight: bold;
+  font-size: 28pt;
+}
+
+.list_item_task_header:hover, .list_item_due_date_header:hover, .list_item_status_header:hover {
+  color: var(--swatch-primary);
+}
+
+.list_item_card, .list_item_add_card
+{
+  background-color: var(--swatch-neutral);
+}
+
+.list_item_card:hover, .list_item_add_card:hover
+{
+  background-color: var(--swatch-complement);
+}
+
+.list_item_add_card {
+  font-weight: bold;
+  font-size: 24pt;
+}
+
+.list_item_card_description {
+  font-weight: bold;
+  font-size: 18pt;
+}
+
+.list_item_card_assigned_to, .list_item_card_due_date, 
+.list_item_card_completed {
+  font-weight: normal;
+  font-size: 14pt;
+}
+
+.assigned_to
+{
+  font-weight: bold;
+}
+
+.card-delete-button
+{
+  cursor: pointer;
+}
+
+.controls
+{
+  border-top-color: black;
+  border-right-color: black;
+  border-bottom-color: black;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-top-width: medium;
+  border-right-width: medium;
+  border-bottom-width: medium;
+}
+

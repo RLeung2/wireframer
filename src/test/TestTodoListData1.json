@@ -1,0 +1,67 @@
+{
+    "users": [
+        {
+            "key": 0,
+            "email": "admin1@gmail.com",
+            "password": "admin123",
+            "firstName": "Admin",
+            "initials": "AL",
+            "lastName": "Lee",
+            "isAdmin": true,
+            "wireframes": [
+                {
+                    "name": "wireframe1",
+                    "key": 0,
+                    "height": 5000,
+                    "width": 5000,
+                    "zoom": 1,
+                    "controls": [
+                        
+                    ]
+                },
+                {
+                    "name": "wireframe2",
+                    "key": 1,
+                    "height": 5000,
+                    "width": 5000,
+                    "zoom": 1,
+                    "controls": [
+                        
+                    ]
+                },
+                {
+                    "name": "wireframe3",
+                    "key": 2,
+                    "height": 4500,
+                    "width": 4500,
+                    "zoom": 1,
+                    "controls": [
+                        
+                    ]
+                }
+            ]
+        },
+        {
+            "key": 1,
+            "email": "josh@gmail.com",
+            "firstName": "Josh",
+            "initials": "JL",
+            "lastName": "Lee",
+            "isAdmin": false,
+            "wireframes": [
+                {
+                    "key": 0,
+                    "controls": [
+  
+                    ]
+                },
+                {
+                    "key": 1,
+                    "controls": [
+                        
+                    ]
+                }
+            ]
+        }
+    ]
+}
